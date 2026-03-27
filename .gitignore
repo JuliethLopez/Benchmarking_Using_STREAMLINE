@@ -1,0 +1,14 @@
+*.DS_Store
+__pycache__
+*rankedEdges.csv
+STREAMLINE/inputs/
+STREAMLINE/outputs/Curated
+STREAMLINE/outputs/*
+STREAMLINE/outputs/*
+*PredictedNetworks.zip
+inputs.zip
+outputs.zip
+*.afdesign
+*README.txt
+Figures/input/corrplot_experimental.svg
+Figures/input/corrplot_synthetic.svg
