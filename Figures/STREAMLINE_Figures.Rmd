@@ -32,7 +32,7 @@ library(ggpubr)
 workingdir = "../STREAMLINE/outputs/" #the "output" folder of BEELINE/STREAMLINE
 
 postproc <- function(data, networks, directed, type){
-  algo_levels = c("GRNBOOST2", "SINCERITIES")
+  algo_levels = c("GRNBOOST2", "INFERELATOR")
   if(!directed){algo_levels = c(algo_levels, "PIDC", "PPCOR")}
   if(type=="raw"){algo_levels = c(algo_levels, "ground truth")}
   data$Algorithm <- factor(data$Algorithm, levels=algo_levels)
@@ -550,11 +550,11 @@ savepdf(figureS2, "figureS2", w=10, h=12)
 ```{r fig.height=6, fig.width=10, message=FALSE, warning=FALSE}
 gsd_gt <- image_ggplot(image_read(paste0(in_dir,"gsd_groundtruth.svg")))
 gsd_grnboost2 <- image_ggplot(image_read(paste0(in_dir,"gsd_GRNBOOST2.svg")))
-gsd_sincerities <- image_ggplot(image_read(paste0(in_dir, "gsd_SINCERITIES.svg")))
+gsd_INFERELATOR <- image_ggplot(image_read(paste0(in_dir, "gsd_INFERELATOR.svg")))
 gsd_pidc <- image_ggplot(image_read(paste0(in_dir, "gsd_PIDC.svg")))
 gsd_ppcor <- image_ggplot(image_read(paste0(in_dir, "gsd_PPCOR.svg")))
   
-directed_algos <- plot_grid(gsd_grnboost2, NULL, gsd_sincerities, rel_widths=c(1,-.15,1), ncol=3, align='vh')
+directed_algos <- plot_grid(gsd_grnboost2, NULL, gsd_INFERELATOR, rel_widths=c(1,-.15,1), ncol=3, align='vh')
 undirected_algos <- plot_grid(gsd_pidc, NULL, gsd_ppcor, rel_widths=c(1,-.15,1), ncol=3, align='vh')
 predictions <- plot_grid(directed_algos, NULL,undirected_algos,rel_heights=c(1,-.3,1),nrow=3)
 figureS3  <- plot_grid(gsd_gt, predictions, ncol=2, rel_widths=c(1, 2))

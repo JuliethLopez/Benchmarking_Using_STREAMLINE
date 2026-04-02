@@ -374,7 +374,7 @@ library(ggpubr)</code></pre>
 <pre class="r"><code>workingdir = &quot;../STREAMLINE/outputs/&quot; #the &quot;output&quot; folder of BEELINE/STREAMLINE
 
 postproc &lt;- function(data, networks, directed, type){
-  algo_levels = c(&quot;GRNBOOST2&quot;, &quot;SINCERITIES&quot;)
+  algo_levels = c(&quot;GRNBOOST2&quot;, &quot;INFERELATOR&quot;)
   if(!directed){algo_levels = c(algo_levels, &quot;PIDC&quot;, &quot;PPCOR&quot;)}
   if(type==&quot;raw&quot;){algo_levels = c(algo_levels, &quot;ground truth&quot;)}
   data$Algorithm &lt;- factor(data$Algorithm, levels=algo_levels)
@@ -883,11 +883,11 @@ figureS2</code></pre>
 <h2>Figure S3</h2>
 <pre class="r"><code>gsd_gt &lt;- image_ggplot(image_read(paste0(in_dir,&quot;gsd_groundtruth.svg&quot;)))
 gsd_grnboost2 &lt;- image_ggplot(image_read(paste0(in_dir,&quot;gsd_GRNBOOST2.svg&quot;)))
-gsd_sincerities &lt;- image_ggplot(image_read(paste0(in_dir, &quot;gsd_SINCERITIES.svg&quot;)))
+gsd_INFERELATOR &lt;- image_ggplot(image_read(paste0(in_dir, &quot;gsd_INFERELATOR.svg&quot;)))
 gsd_pidc &lt;- image_ggplot(image_read(paste0(in_dir, &quot;gsd_PIDC.svg&quot;)))
 gsd_ppcor &lt;- image_ggplot(image_read(paste0(in_dir, &quot;gsd_PPCOR.svg&quot;)))
   
-directed_algos &lt;- plot_grid(gsd_grnboost2, NULL, gsd_sincerities, rel_widths=c(1,-.15,1), ncol=3, align=&#39;vh&#39;)
+directed_algos &lt;- plot_grid(gsd_grnboost2, NULL, gsd_INFERELATOR, rel_widths=c(1,-.15,1), ncol=3, align=&#39;vh&#39;)
 undirected_algos &lt;- plot_grid(gsd_pidc, NULL, gsd_ppcor, rel_widths=c(1,-.15,1), ncol=3, align=&#39;vh&#39;)
 predictions &lt;- plot_grid(directed_algos, NULL,undirected_algos,rel_heights=c(1,-.3,1),nrow=3)
 figureS3  &lt;- plot_grid(gsd_gt, predictions, ncol=2, rel_widths=c(1, 2))
