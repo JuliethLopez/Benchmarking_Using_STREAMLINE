@@ -32,17 +32,18 @@ library(ggpubr)
 workingdir = "../STREAMLINE/outputs/" #the "output" folder of BEELINE/STREAMLINE
 
 postproc <- function(data, networks, directed, type){
-  algo_levels = c("GRNBOOST2", "INFERELATOR")
-  if(!directed){algo_levels = c(algo_levels, "PIDC", "PPCOR")}
+  algo_levels = c("GRNBOOST2", "INFERELATOR", "BORDA", "mBORDA", "sBORDA", "smBORDA")
+  if(!directed){algo_levels = c(algo_levels, "PIDC", "PPCOR", "hdWGCNA")}
   if(type=="raw"){algo_levels = c(algo_levels, "ground truth")}
   data$Algorithm <- factor(data$Algorithm, levels=algo_levels)
   if(networks=="experimental"){data$Network <- factor(data$Network, levels=c("yeast", "hESC", "mDC", "mESC"))} 
-  else {data$Network <- factor(data$Network, levels=c("ER", "SF", "SSF", "SW"))}
+  else {data$Network <- factor(data$Network, levels=c("GSD", "HSC", "mCAD", "VSC"))}
   if(("Shortest Path Length") %in% colnames(data)){colnames(data)[colnames(data) == 'Shortest Path Length'] <- 'Avg Shortest Path Length'}
   return(data)
 }
-STREAMLINE_results <- function(networks = c("synthetic", "experimental"), type, directed, add_dataset=FALSE){
+STREAMLINE_results <- function(networks = c("Curated", "experimental"), type, directed, add_dataset=FALSE){
   read_file <- function(datadir, directed, type=c("mse", "mse_rel", "jaccard", "jaccard_ratio", "correlation", "raw")) {
+    print(datadir)
     if (directed){ str_directed = "directed" } else {str_directed = "undirected"}
     if (type %in% c("raw", "mse", "mse_rel")) {str_mode = "global"} else {str_mode = "local"}
     data = read.csv(paste0(datadir, "/STREAMLINE_", str_mode, "_", str_directed, "_", type, ".csv"), check.names=FALSE)
@@ -56,7 +57,7 @@ STREAMLINE_results <- function(networks = c("synthetic", "experimental"), type, 
     networks_df$Network <- network
     return(networks_df)
   }
-  if(networks == "synthetic"){datasets= c("ER", "SF", "SSF", "SW")}
+  if(networks == "Curated"){datasets= c("GSD", "HSC", "mCAD", "VSC")}
   else if(networks == "experimental"){datasets = c("yeast", "hESC", "mDC", "mESC")}
   df_list = lapply(datasets, merge_datasets, networks=networks, directed=directed, type=type)
   data <- bind_rows(df_list)
@@ -65,7 +66,7 @@ STREAMLINE_results <- function(networks = c("synthetic", "experimental"), type, 
 }
 load_performance_data <- function(metric, networks, directed){
   if (directed){ str_directed = "directed" } else {str_directed = "undirected"}
-  if(networks == "synthetic"){datasets= c("ER", "SF", "SSF", "SW")}
+  if(networks == "Curated"){datasets= c("GSD", "HSC", "mCAD", "VSC")}
   else if(networks == "experimental"){datasets = c("yeast", "hESC", "mDC", "mESC")}
   read_file <- function(dataset, networks, metric, directed) {
     data <- read.csv(paste0(workingdir, networks, "/", dataset, "/", dataset, "-", metric, "-", directed, ".csv"), row.names="X")
@@ -86,9 +87,9 @@ load_performance_data <- function(metric, networks, directed){
 
 ```{r message=FALSE, warning=FALSE}
 out_dir <- "./output/" #directory to save image outputs
-in_dir <- "./input/" #directory for required external images
+in_dir <- "../Figures/input/" #directory for required external images
 
-algo_palette = c("#37437C", "#9F5E45", "#407346", "#833B38", "grey")
+algo_palette = c("#37437C", "#9F5E45", "#407346", "#833B38", "#2ebebe", "#be2ebe", "#be842e", "#085e22", "grey")
 exp_network_palette = brewer.pal(n = 4, name = "Set1")
 syn_network_palette = brewer.pal(n = 4, name = "Set2")
 
@@ -162,21 +163,21 @@ plot_metric <- function(metric, data, plot, x="Algorithm", ylab=NULL, no_legend=
 metric_row <- function(metrics, plot, networks, type, directed,  x="Algorithm", ylab=NULL, ncol=length(metrics), algos=NULL){
   data = STREAMLINE_results(networks=networks, type=type, directed=directed)
   if(!is.null(algos)){data = data[data$Algorithm %in% algos, ]}
-  if(networks=="synthetic"){palette=syn_network_palette} else if(networks=="experimental"){palette=exp_network_palette}
+  if(networks=="Curated"){palette=syn_network_palette} else if(networks=="experimental"){palette=exp_network_palette}
   row_plots <- lapply(metrics, plot_metric, data=data, plot=plot, x=x, ylab=ylab, no_legend=TRUE, palette=palette)
   row <- plot_grid(plotlist=row_plots, ncol = ncol)
 }
 
-syn_data = STREAMLINE_results(networks="synthetic", type="raw", directed=FALSE)
+syn_data = STREAMLINE_results(networks="Curated", type="raw", directed=FALSE)
 syn_network_legend <- get_legend(plot_metric("Assortativity", data=syn_data, plot="violin", palette=syn_network_palette))
 
 exp_data = STREAMLINE_results(networks="experimental", type="raw", directed=FALSE)
 exp_network_legend <- get_legend(plot_metric("Assortativity", data=exp_data, plot="sina", palette=exp_network_palette))
 
-syn_data = STREAMLINE_results(networks="synthetic", type="mse", directed=FALSE)
+syn_data = STREAMLINE_results(networks="Curated", type="mse", directed=FALSE)
 undir_algo_legend <- get_legend(plot_metric("Assortativity", data=syn_data, plot="bar"))
 
-syn_data = STREAMLINE_results(networks="synthetic", type="mse", directed=TRUE)
+syn_data = STREAMLINE_results(networks="Curated", type="mse", directed=TRUE)
 dir_algo_legend <- get_legend(plot_metric("Assortativity", data=syn_data, plot="bar"))
 ```
 
@@ -194,7 +195,7 @@ figures2_3 <- function(metrics, name){
   pic3 <- image_ggplot(image_read(paste0(in_dir, tolower(metrics[3]), ".svg")))
   row1 <- plot_grid(NULL, pic1, NULL, pic2, NULL, pic3, rel_widths = c(.3, 1, 0.3, 1, 0.3, 1), ncol = 6, align="v")
   
-  row2 <- metric_row(metrics, plot="bar", networks = "synthetic", type="mse", ylab="MSE", directed=FALSE)
+  row2 <- metric_row(metrics, plot="bar", networks = "Curated", type="mse", ylab="MSE", directed=FALSE)
   row3 <- metric_row(metrics, plot="bar", networks = "experimental", type="mse", ylab="MSE", directed=FALSE)
   
   figure <- plot_grid(title_row, row1, NULL, row2, NULL, row3, undir_algo_legend, rel_heights = c(.2, 3, .2, 4, .2, 4, .5), nrow=7, labels=c("A", "", "", "B", "", "C"))
@@ -212,7 +213,7 @@ figure3 <- figures2_3(metrics=c("Assortativity", "Clustering Coefficient", "Cent
 ```{r fig.height=6, fig.width=10, message=FALSE, warning=FALSE}
 metrics = c("Betweenness", "Centrality", "Radiality", "PageRank")
 
-row1 <- metric_row(metrics, plot="ji_ratio", networks = "synthetic", type="jaccard_ratio", directed=FALSE)
+row1 <- metric_row(metrics, plot="ji_ratio", networks = "Curated", type="jaccard_ratio", directed=FALSE)
 row2 <- metric_row(metrics, plot="ji_ratio", networks = "experimental", type="jaccard_ratio", directed=FALSE)
 
 figure4 <- plot_grid(NULL, row1, NULL, row2, undir_algo_legend, rel_heights = c(.5, 3, .5, 3, .5), nrow=5, labels=c("A", "", "B", "", ""))
@@ -324,7 +325,7 @@ legends_undirected <- list(
 )
 row_groups <- tribble(
   ~group,      ~level1,
-  "synthetic",     "Synthetic networks",
+  "Curated",     "Curated networks",
   "experimental",      "Experimental networks",
 )
 
@@ -398,12 +399,12 @@ preprocess_merged <- function(networks, hub_metrics, ht_metrics, ie_metrics=NULL
   return(plot_df)
 }
 summary_plot <- function(hub_metrics, ht_metrics, ie_metrics=NULL, directed, name){
-  synthetic_summary_plot <- preprocess_merged(networks="synthetic", hub_metrics, ht_metrics, ie_metrics, directed)
+  synthetic_summary_plot <- preprocess_merged(networks="Curated", hub_metrics, ht_metrics, ie_metrics, directed)
   experimental_summary_plot <- preprocess_merged(networks="experimental", hub_metrics, ht_metrics, ie_metrics, directed)
   summary_plot <- rbind(synthetic_summary_plot, experimental_summary_plot)
   summary_plot <- mutate(summary_plot, id = as.character(seq_len(nrow(summary_plot))))
   summary_plot$spacer <- ""
-  row_info <- data.frame(id = summary_plot$id, group = c(rep("synthetic", nrow(synthetic_summary_plot)), rep("experimental", nrow(experimental_summary_plot))))
+  row_info <- data.frame(id = summary_plot$id, group = c(rep("Curated", nrow(synthetic_summary_plot)), rep("experimental", nrow(experimental_summary_plot))))
   
   ht_summary <- add_column_info("hub_topology", "bar", name="Overall hub topology", group="Hub Topology")
   ht_column_infos <- bind_rows(ht_summary, lapply(ht_metrics, add_column_info, type="circle", group="Hub Topology"))
