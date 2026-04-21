@@ -24,6 +24,9 @@ library(RColorBrewer)
 library(dplyr)
 library(cowplot)
 library(ggpubr)
+
+# modules
+#module load HGI/softpack/users/jl38/streamline_graphics/1
 ```
 
 ## Loading the data
@@ -466,8 +469,8 @@ plot_performance_heatmap <- function(networks, metric){
   perf1 <- plot_metric(metric, performance_data, plot="heatmap")
 }
 
-syn_auprc <- plot_performance_heatmap(networks="synthetic", "AUPRC")
-syn_auroc <- plot_performance_heatmap(networks="synthetic", "AUROC")
+syn_auprc <- plot_performance_heatmap(networks="Curated", "AUPRC")
+syn_auroc <- plot_performance_heatmap(networks="Curated", "AUROC")
 exp_epr <- plot_performance_heatmap(networks="experimental", "EPr")
 row1 <- plot_grid(syn_auprc, syn_auroc, exp_epr, ncol = 3)
 
@@ -524,7 +527,7 @@ figure_corrplot <- function(networks){
   return(corr_plot)
 }
 
-corr_syn = figure_corrplot(networks="synthetic")
+corr_syn = figure_corrplot(networks="Curated")
 corr_exp = figure_corrplot(networks="experimental")
 row2 <- plot_grid(corr_syn, corr_exp, ncol = 2, labels=c("B", "C"))
 
@@ -538,7 +541,7 @@ savepdf(figureS1, "figureS1", w=15, h=10)
 ```{r fig.height=12, fig.width=10, message=FALSE, warning=FALSE}
 metrics = c("Global Efficiency", "Local Efficiency", "Avg Shortest Path Length", "Assortativity", "Clustering Coefficient", "Centralization") 
 
-row1_2 <- metric_row(metrics, plot="violin", networks="synthetic", type="raw", directed=FALSE, ncol=3)
+row1_2 <- metric_row(metrics, plot="violin", networks="Curated", type="raw", directed=FALSE, ncol=3)
 row3_4 <- metric_row(metrics, plot="sina", networks="experimental", type="raw", directed=FALSE, ncol=3)
 
 figureS2 <- plot_grid(syn_network_legend, row1_2, NULL, row3_4, exp_network_legend, rel_heights = c(.5, 3, .2, 3, .5), nrow=5, labels=c("A", "", "B", "", ""))
@@ -568,9 +571,9 @@ savepdf(figureS3, "figureS3", w=10, h=6)
 ```{r fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
 metrics = c("Assortativity", "Clustering Coefficient", "In Centralization") 
 
-row1 <- metric_row(metrics, plot="violin", networks="synthetic", type="raw", directed=TRUE, x="Network", algos="ground truth")
+row1 <- metric_row(metrics, plot="violin", networks="Curated", type="raw", directed=TRUE, x="Network", algos="ground truth")
 row2 <- metric_row(metrics, plot="sina", networks="experimental", type="raw", directed=TRUE, x="Network", algos="ground truth")
-row3 <- metric_row(metrics, plot="bar", networks="synthetic", type="mse", directed=TRUE, ylab="MSE")
+row3 <- metric_row(metrics, plot="bar", networks="Curated", type="mse", directed=TRUE, ylab="MSE")
 row4 <- metric_row(metrics, plot="bar", networks="experimental", type="mse", directed=TRUE, ylab="MSE")
 
 figureS4 <- plot_grid(row1, row2, row3, row4, dir_algo_legend, nrow=5, rel_heights = c(3, 3, 3, 3, .5), labels=c("A", "B", "C", "D", ""))
@@ -583,9 +586,9 @@ savepdf(figureS4, "figureS4", w=10, h=10)
 ```{r fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
 metrics = c("Betweenness", "Out Centrality", "PageRank")
 
-row1 <- metric_row(metrics, plot="ji_ratio", networks="synthetic", type="jaccard_ratio", directed=TRUE)
+row1 <- metric_row(metrics, plot="ji_ratio", networks="Curated", type="jaccard_ratio", directed=TRUE)
 row2 <- metric_row(metrics, plot="ji_ratio", networks="experimental", type="jaccard_ratio", directed=TRUE)
-row3 <- metric_row(metrics, plot="ji", networks="synthetic", type="jaccard", directed=TRUE, ylab="Jaccard coefficient")
+row3 <- metric_row(metrics, plot="ji", networks="Curated", type="jaccard", directed=TRUE, ylab="Jaccard coefficient")
 row4 <- metric_row(metrics, plot="ji", networks="experimental", type="jaccard", directed=TRUE, ylab="Jaccard coefficient")
 
 figureS5 <- plot_grid(dir_algo_legend, row1, row2, row3, row4, nrow=5, rel_heights = c(.5, 3, 3,3,3,.5), labels=c("", "A","B", "C","D"))
@@ -598,7 +601,7 @@ savepdf(figureS5, "figureS5", w=10, h=10)
 ```{r fig.height=6, fig.width=11, message=FALSE, warning=FALSE}
 metrics = c("Betweenness", "Centrality", "Radiality", "PageRank")
 
-row1 <- metric_row(metrics, plot="ji", networks="synthetic", type="jaccard", directed=FALSE, ylab="Jaccard coefficient")
+row1 <- metric_row(metrics, plot="ji", networks="Curated", type="jaccard", directed=FALSE, ylab="Jaccard coefficient")
 row2 <- metric_row(metrics, plot="ji", networks="experimental", type="jaccard", directed=FALSE, ylab="Jaccard coefficient")
 
 figureS6 <- plot_grid(NULL, row1, NULL, row2, undir_algo_legend, rel_heights = c(.5, 3, .5, 3, .5), nrow=5, labels=c("A", "", "B", "", ""))
@@ -611,11 +614,11 @@ savepdf(figureS6, "figureS6", w=11, h=6)
 ```{r fig.height=6, fig.width=10, message=FALSE, warning=FALSE}
 metrics = c("Local Efficiency", "Clustering Coefficient", "Node Degrees")
 
-row1 <- metric_row(metrics, plot="bar", networks="synthetic", type="correlation", directed=FALSE)
+row1 <- metric_row(metrics, plot="bar", networks="Curated", type="correlation", directed=FALSE)
 row2 <- metric_row(metrics, plot="bar", networks="experimental", type="correlation", directed=FALSE)
 
 figure <- plot_grid(undir_algo_legend, row1, row2, nrow=3, rel_heights = c(.5, 3, 3), labels=c("", "A", "B"))
 figure
-#savepdf(figure, "figureCorr", w=10, h=6)
+savepdf(figure, "figureCorr", w=10, h=6)
 ```
 
