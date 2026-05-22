@@ -12,3 +12,5 @@ outputs.zip
 *README.txt
 Figures/input/corrplot_experimental.svg
 Figures/input/corrplot_synthetic.svg
+*RData
+*Rhistory
