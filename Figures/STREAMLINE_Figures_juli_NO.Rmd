@@ -30,7 +30,7 @@ library(ggpubr)
 
 ```{r message=FALSE, warning=FALSE}
 workingdir = "../STREAMLINE/outputs/" #the "output" folder of BEELINE/STREAMLINE
-library(corrplot)
+
 postproc <- function(data, networks, directed, type){
   algo_levels = c("GRNBOOST2", "INFERELATOR")
   if(!directed){algo_levels = c(algo_levels, "PIDC", "PPCOR", "hdWGCNA", "BORDA", "sBORDA", "mBORDA", "smBORDA")}

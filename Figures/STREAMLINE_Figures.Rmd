@@ -24,9 +24,6 @@ library(RColorBrewer)
 library(dplyr)
 library(cowplot)
 library(ggpubr)
-
-# modules
-#module load HGI/softpack/users/jl38/streamline_graphics/1
 ```
 
 ## Loading the data
@@ -35,18 +32,17 @@ library(ggpubr)
 workingdir = "../STREAMLINE/outputs/" #the "output" folder of BEELINE/STREAMLINE
 
 postproc <- function(data, networks, directed, type){
-  algo_levels = c("GRNBOOST2", "INFERELATOR", "BORDA", "mBORDA", "sBORDA", "smBORDA")
-  if(!directed){algo_levels = c(algo_levels, "PIDC", "PPCOR", "hdWGCNA")}
+  algo_levels = c("GRNBOOST2", "INFERELATOR")
+  if(!directed){algo_levels = c(algo_levels, "PIDC", "PPCOR")}
   if(type=="raw"){algo_levels = c(algo_levels, "ground truth")}
   data$Algorithm <- factor(data$Algorithm, levels=algo_levels)
   if(networks=="experimental"){data$Network <- factor(data$Network, levels=c("yeast", "hESC", "mDC", "mESC"))} 
-  else {data$Network <- factor(data$Network, levels=c("GSD", "HSC", "mCAD", "VSC"))}
+  else {data$Network <- factor(data$Network, levels=c("GSD","VSC","HSC","mCAD"))}
   if(("Shortest Path Length") %in% colnames(data)){colnames(data)[colnames(data) == 'Shortest Path Length'] <- 'Avg Shortest Path Length'}
   return(data)
 }
 STREAMLINE_results <- function(networks = c("Curated", "experimental"), type, directed, add_dataset=FALSE){
   read_file <- function(datadir, directed, type=c("mse", "mse_rel", "jaccard", "jaccard_ratio", "correlation", "raw")) {
-    print(datadir)
     if (directed){ str_directed = "directed" } else {str_directed = "undirected"}
     if (type %in% c("raw", "mse", "mse_rel")) {str_mode = "global"} else {str_mode = "local"}
     data = read.csv(paste0(datadir, "/STREAMLINE_", str_mode, "_", str_directed, "_", type, ".csv"), check.names=FALSE)
@@ -60,7 +56,7 @@ STREAMLINE_results <- function(networks = c("Curated", "experimental"), type, di
     networks_df$Network <- network
     return(networks_df)
   }
-  if(networks == "Curated"){datasets= c("GSD", "HSC", "mCAD", "VSC")}
+  if(networks == "Curated"){datasets= c("GSD","VSC","HSC","mCAD")}
   else if(networks == "experimental"){datasets = c("yeast", "hESC", "mDC", "mESC")}
   df_list = lapply(datasets, merge_datasets, networks=networks, directed=directed, type=type)
   data <- bind_rows(df_list)
@@ -69,7 +65,7 @@ STREAMLINE_results <- function(networks = c("Curated", "experimental"), type, di
 }
 load_performance_data <- function(metric, networks, directed){
   if (directed){ str_directed = "directed" } else {str_directed = "undirected"}
-  if(networks == "Curated"){datasets= c("GSD", "HSC", "mCAD", "VSC")}
+  if(networks == "Curated"){datasets= c("GSD","VSC","HSC","mCAD")}
   else if(networks == "experimental"){datasets = c("yeast", "hESC", "mDC", "mESC")}
   read_file <- function(dataset, networks, metric, directed) {
     data <- read.csv(paste0(workingdir, networks, "/", dataset, "/", dataset, "-", metric, "-", directed, ".csv"), row.names="X")
@@ -90,9 +86,9 @@ load_performance_data <- function(metric, networks, directed){
 
 ```{r message=FALSE, warning=FALSE}
 out_dir <- "./output/" #directory to save image outputs
-in_dir <- "../Figures/input/" #directory for required external images
+in_dir <- "./input/" #directory for required external images
 
-algo_palette = c("#37437C", "#9F5E45", "#407346", "#833B38", "#2ebebe", "#be2ebe", "#be842e", "#085e22", "grey")
+algo_palette = c("#37437C", "#9F5E45", "#407346", "#833B38", "grey")
 exp_network_palette = brewer.pal(n = 4, name = "Set1")
 syn_network_palette = brewer.pal(n = 4, name = "Set2")
 
@@ -402,12 +398,12 @@ preprocess_merged <- function(networks, hub_metrics, ht_metrics, ie_metrics=NULL
   return(plot_df)
 }
 summary_plot <- function(hub_metrics, ht_metrics, ie_metrics=NULL, directed, name){
-  synthetic_summary_plot <- preprocess_merged(networks="Curated", hub_metrics, ht_metrics, ie_metrics, directed)
+  Curated_summary_plot <- preprocess_merged(networks="Curated", hub_metrics, ht_metrics, ie_metrics, directed)
   experimental_summary_plot <- preprocess_merged(networks="experimental", hub_metrics, ht_metrics, ie_metrics, directed)
-  summary_plot <- rbind(synthetic_summary_plot, experimental_summary_plot)
+  summary_plot <- rbind(Curated_summary_plot, experimental_summary_plot)
   summary_plot <- mutate(summary_plot, id = as.character(seq_len(nrow(summary_plot))))
   summary_plot$spacer <- ""
-  row_info <- data.frame(id = summary_plot$id, group = c(rep("Curated", nrow(synthetic_summary_plot)), rep("experimental", nrow(experimental_summary_plot))))
+  row_info <- data.frame(id = summary_plot$id, group = c(rep("Curated", nrow(Curated_summary_plot)), rep("experimental", nrow(experimental_summary_plot))))
   
   ht_summary <- add_column_info("hub_topology", "bar", name="Overall hub topology", group="Hub Topology")
   ht_column_infos <- bind_rows(ht_summary, lapply(ht_metrics, add_column_info, type="circle", group="Hub Topology"))
@@ -452,7 +448,7 @@ summary_plot <- function(hub_metrics, ht_metrics, ie_metrics=NULL, directed, nam
 ie_metrics = c("Global Efficiency", "Local Efficiency", "Avg Shortest Path Length")
 ht_metrics = c("Assortativity", "Clustering Coefficient", "Centralization")
 hub_metrics = c("Betweenness", "Centrality", "Radiality", "PageRank")
-summary_plot(hub_metrics, ht_metrics, ie_metrics, directed=FALSE, name="figure5")
+summary_plot(hub_metrics, ht_metrics, ie_metrics, directed=FALSE, name="figure5_ORIG")
 
 ## Figure S7 (directed)
 topology_metrics = c("Assortativity", "Clustering Coefficient", "In Centralization")
@@ -475,7 +471,7 @@ exp_epr <- plot_performance_heatmap(networks="experimental", "EPr")
 row1 <- plot_grid(syn_auprc, syn_auroc, exp_epr, ncol = 3)
 
 figure_corrplot <- function(networks){
-  if(networks=="synthetic"){
+  if(networks=="Curated"){
     performance_metrics = c("AUPRC", "AUROC", "EPr")
   } else if (networks=="experimental"){
     performance_metrics = c("EPr")
@@ -619,6 +615,5 @@ row2 <- metric_row(metrics, plot="bar", networks="experimental", type="correlati
 
 figure <- plot_grid(undir_algo_legend, row1, row2, nrow=3, rel_heights = c(.5, 3, 3), labels=c("", "A", "B"))
 figure
-savepdf(figure, "figureCorr", w=10, h=6)
+#savepdf(figure, "figureCorr", w=10, h=6)
 ```
-

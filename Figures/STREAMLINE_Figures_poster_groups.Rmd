@@ -1,0 +1,385 @@
+---
+title: "STREAMLINE Figures"
+author: "Marco Stock"
+date: "2024-02-18"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+#imports
+library(tidyr)
+library(ggforce)
+library(corrplot)
+library(gridGraphics)
+library(funkyheatmap)
+library(tibble)
+library(magick)
+library(RColorBrewer)
+library(dplyr)
+library(cowplot)
+library(ggpubr)
+
+# modules
+#module load HGI/softpack/users/jl38/streamline_graphics/1
+```
+
+## Loading the data
+
+```{r message=FALSE, warning=FALSE}
+workingdir = "../STREAMLINE/outputs/" #the "output" folder of BEELINE/STREAMLINE
+
+postproc <- function(data, networks, directed, type){
+  if(nrow(data) == 0) return(data)
+  
+  algo_levels = c("GRNBOOST2", "INFERELATOR", "BORDA", "mBORDA", "sBORDA", "smBORDA")
+  if(!directed){algo_levels = c(algo_levels, "PIDC", "PPCOR", "hdWGCNA")}
+  if(type=="raw"){algo_levels = c(algo_levels, "ground truth")}
+  
+  data$Algorithm <- factor(data$Algorithm, levels=algo_levels)
+  
+  if(networks=="experimental"){
+    # Experimental networks are flat and have specific names
+    data$Network <- factor(data$Network, levels=c("yeast", "hESC", "mDC", "mESC"))
+  } else {
+    # Curated networks have the 12 subgroups (Summarized across replicates)
+    expected <- c("GSD-200", "GSD-1000", "GSD-2000",
+                  "HSC-200", "HSC-1000", "HSC-2000",
+                  "mCAD-200", "mCAD-1000", "mCAD-2000",
+                  "VSC-200", "VSC-1000", "VSC-2000")
+    data$Network <- factor(data$Network, levels=intersect(expected, unique(data$Network)))
+  }
+  
+  if("Shortest Path Length" %in% colnames(data)){
+    colnames(data)[colnames(data) == 'Shortest Path Length'] <- 'Avg Shortest Path Length'
+  }
+  return(data)
+}
+
+STREAMLINE_results <- function(networks = "Curated", type, directed, add_dataset=FALSE){
+  
+  read_file <- function(datadir, is_curated, directed, type) {
+    str_dir = ifelse(directed, "directed", "undirected")
+    str_mode = ifelse(type %in% c("raw", "mse", "mse_rel"), "global", "local")
+    path <- file.path(datadir, paste0("STREAMLINE_", str_mode, "_", str_dir, "_", type, ".csv"))
+    
+    if (file.exists(path)) {
+      df <- read.csv(path, check.names=FALSE)
+      if(nrow(df) == 0) return(NULL)
+      colnames(df)[1] <- "Algorithm"
+      
+      if(is_curated){
+        # Strip replicate ID (GSD-200-1 -> GSD-200)
+        df$Network <- sub("-[0-9]+$", "", basename(datadir))
+      } else {
+        # Keep name as is (yeast, hESC, etc)
+        df$Network <- basename(datadir)
+      }
+      return(df)
+    }
+    return(NULL)
+  }
+
+  base_path <- paste0(workingdir, networks)
+  
+  if(networks == "Curated"){
+    # Curated: Look for subgroup folders that contain replicates (folders with dashes and numbers)
+    all_dirs <- list.dirs(base_path, recursive = TRUE)
+    target_dirs <- all_dirs[grepl("-[0-9]+$", basename(all_dirs))]
+    df_list <- lapply(target_dirs, read_file, is_curated=TRUE, directed=directed, type=type)
+  } else {
+    # Experimental: Look only at the top-level folders inside 'experimental'
+    target_dirs <- list.dirs(base_path, recursive = FALSE)
+    df_list <- lapply(target_dirs, read_file, is_curated=FALSE, directed=directed, type=type)
+  }
+  
+  combined <- bind_rows(df_list)
+  if(nrow(combined) == 0) stop("No data found for: ", networks)
+  
+  return(postproc(combined, networks, directed, type))
+}
+load_performance_data <- function(metric, networks, directed){
+  if (directed){ str_directed = "directed" } else {str_directed = "undirected"}
+  if(networks == "Curated"){datasets= c("GSD", "HSC", "mCAD", "VSC")}
+  else if(networks == "experimental"){datasets = c("yeast", "hESC", "mDC", "mESC")}
+  read_file <- function(dataset, networks, metric, directed) {
+    data <- read.csv(paste0(workingdir, networks, "/", dataset, "/", dataset, "-", metric, "-", directed, ".csv"), row.names="X")
+    raw_wide <- tibble::rownames_to_column(as.data.frame(t(data)), var = "Dataset")
+    raw <- pivot_longer(raw_wide, cols=2:ncol(raw_wide), names_to="Algorithm", values_to = metric,)
+    raw_meta <- cbind(raw, dataset)
+    colnames(raw_meta)[4] <- "Network"
+    return(raw_meta)
+  }
+  df_list = lapply(datasets, read_file, networks=networks, metric=metric, directed=str_directed)
+  data <- bind_rows(df_list)
+  data <- postproc(data, networks, directed, metric)
+  return(data)
+}
+```
+
+## General figure utilities
+
+```{r message=FALSE, warning=FALSE}
+out_dir <- "./outputs_graphics/groups/" #directory to save image outputs
+in_dir <- "../Figures/input/" #directory for required external images
+
+# Updated Palettes
+algo_palette = c("#37437C", "#9F5E45", "#407346", "#833B38", "#2ebebe", "#be2ebe", "#be842e", "#085e22", "grey")
+exp_network_palette = brewer.pal(n = 4, name = "Set1")
+syn_network_palette = colorRampPalette(brewer.pal(8, "Set2"))(12) # 12 colors for Curated
+
+# Option B: Grouped colors - 3 shades of Green for GSD, 3 shades of Blue for HSC, etc.
+# syn_network_palette <- c(brewer.pal(3, "Greens"), brewer.pal(3, "Blues"), 
+#                          brewer.pal(3, "Oranges"), brewer.pal(3, "Purples"))
+
+savepdf <- function(plot, name, w, h){
+  ggsave(paste0(out_dir, name, ".pdf"), plot, device = "pdf", width = w, height = h, units = "in", dpi = 300) }
+
+plot_metric <- function(metric, data, plot, x="Algorithm", ylab=NULL, no_legend=FALSE, palette=NULL){
+  
+  scale_x_network = function(...){scale_x_discrete(limits= sort(unique(data$Network)), ...)}
+  scale_x_algo <- function(...){scale_x_discrete(limits= sort(unique(data$Algorithm)), ...)}
+  
+  if (plot =="sina"){
+    panel <- ggplot(data, aes(x = .data[[x]], y = .data[[metric]], color = Network)) + geom_sina(na.rm = TRUE) + theme_pubr() + 
+      scale_colour_manual(values = palette, labels= sort(unique(data$Network))) + theme(legend.text=element_text(size=rel(1.2)), 
+      legend.key.size=unit(1, 'cm'), legend.title=element_text(size=rel(1.2))) + stat_summary(fun.y=median, geom="crossbar", size=.1) +labs(y=metric)
+    if(x=="Algorithm"){panel <- panel + scale_x_algo(guide = guide_axis(angle = 45))}
+    else if(x=="Network") { 
+      panel <- panel + scale_x_network()
+      if(metric=="In Centralization"){panel <- panel + scale_y_log10() + ylab("log10(In Centralization)")}
+    }
+  } 
+  if(plot %in% c("ji", "ji_ratio")){
+    #mean_data <- aggregate(. ~ Algorithm + Network, data=data, FUN=mean)
+    #se_data <- aggregate(. ~ Algorithm + Network, data=data, FUN=function(x){sd(x)/sqrt(length(x))})
+    mean_data <- aggregate(as.formula(paste(metric, "~ Algorithm + Network")), data=data, FUN=mean, na.rm=TRUE, na.action=na.pass)
+    se_data <- aggregate(as.formula(paste(metric, "~ Algorithm + Network")), data=data, FUN=function(x){sd(x, na.rm=TRUE)/sqrt(sum(!is.na(x)))}, na.action=na.pass)
+    data1 <- data.frame("Algorithm"=mean_data$Algorithm, "Network"=mean_data$Network, "Mean"=mean_data[,metric], "Se"=se_data[,metric])
+    
+    panel <- ggplot(data1, aes(x=Network, y=Mean, color = Algorithm)) + scale_color_manual(values=algo_palette) +
+      geom_point( position=position_dodge(0.5))+  theme_pubr() +
+      geom_errorbar(aes(ymin=Mean-Se, ymax=Mean+Se), width=.5,  position=position_dodge(0.5)) +
+      ggtitle(metric) + theme(plot.title = element_text(hjust = 0.5)) +
+      scale_x_network() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1)) # rotate x labels
+
+    if(plot=="ji_ratio"){
+        panel <- panel + geom_hline(yintercept = 1, color="red", linetype="solid", size=0.7) + labs(y= expression(J / J["rand"]))
+    }
+  }
+  if(plot == "heatmap"){
+    data <- select(data, -Dataset)
+    median_data <- aggregate(as.formula(paste(metric, "~ Algorithm + Network")), data=data, FUN=function(x) as.numeric(median(x, na.rm = TRUE)), na.action=na.pass)
+    #median_data <- aggregate(. ~ Algorithm + Network, data=data, FUN=function(x) as.numeric(median(x, na.rm = TRUE)))
+    if(metric == "EPr"){median_data[metric] <- median_data[metric]*100}
+    panel <- ggplot(median_data, aes(x = Network, y = Algorithm, fill = .data[[metric]])) + theme_pubr() +
+      geom_tile(color = "white", lwd = .5, linetype = 1) + scale_fill_gradient2(low="white", high="blue") +
+      geom_text(aes(label = round(.data[[metric]], 2)), color = ifelse(median_data[metric] >0.6, "white", "black"), size = 4) + 
+      scale_colour_manual(values=c("white"="white", "black"="black")) +
+      theme(legend.position="right") + coord_fixed() +
+      scale_x_network() + scale_y_discrete(limits= rev(sort(unique(data$Algorithm))))
+    if(metric == "EPr"){panel <- panel + labs(fill= expression(paste("EPr x", 10^{-2})))}
+  }
+  if(plot == "bar"){
+    panel <- ggbarplot(data, x = "Network", y = metric, fill = "Algorithm",
+                      add = "mean_se", palette = algo_palette,
+                      position = position_dodge(0.5), na.rm = TRUE) + ggtitle(metric) + 
+                      theme(plot.title = element_text(hjust = 0.5),axis.text.x = element_text(angle = 45, hjust = 1)) +
+                      scale_x_network()
+  } 
+  if (plot =="violin"){
+    panel <- ggviolin(data, x = x, y = metric, fill = "Network", 
+                      palette = palette, draw_quantiles = 0.5, na.rm = TRUE) +
+                      labs(y=metric) + ggtitle(metric) + 
+                      theme(plot.title = element_text(hjust = 0.5),axis.text.x = element_text(angle = 45, hjust = 1)) +
+                      scale_x_network()
+    if(x=="Algorithm"){
+      panel <- panel + scale_x_algo(guide = guide_axis(angle = 45)) + geom_vline(xintercept=4.5, linetype="dotted")
+    }
+    else if(x=="Network"){
+      panel <- panel + scale_x_network()
+    }
+  }
+  if (!is.null(ylab)) {panel = panel + labs(y=ylab)}
+  if (no_legend) {panel = panel + theme(legend.position="none")}
+  return(panel)
+}
+
+metric_row <- function(metrics, plot, networks, type, directed,  x="Algorithm", ylab=NULL, ncol=length(metrics), algos=NULL){
+  data = STREAMLINE_results(networks=networks, type=type, directed=directed)
+  if(!is.null(algos)){data = data[data$Algorithm %in% algos, ]}
+  if(networks=="Curated"){palette=syn_network_palette} else if(networks=="experimental"){palette=exp_network_palette}
+  row_plots <- lapply(metrics, plot_metric, data=data, plot=plot, x=x, ylab=ylab, no_legend=TRUE, palette=palette)
+  row <- plot_grid(plotlist=row_plots, ncol = ncol)
+}
+
+syn_data = STREAMLINE_results(networks="Curated", type="raw", directed=FALSE)
+syn_network_legend <- get_legend(plot_metric("Assortativity", data=syn_data, plot="violin", palette=syn_network_palette))
+
+exp_data = STREAMLINE_results(networks="experimental", type="raw", directed=FALSE)
+exp_network_legend <- get_legend(plot_metric("Assortativity", data=exp_data, plot="sina", palette=exp_network_palette))
+
+syn_data = STREAMLINE_results(networks="Curated", type="mse", directed=FALSE)
+undir_algo_legend <- get_legend(plot_metric("Assortativity", data=syn_data, plot="bar"))
+
+syn_data = STREAMLINE_results(networks="Curated", type="mse", directed=TRUE)
+dir_algo_legend <- get_legend(plot_metric("Assortativity", data=syn_data, plot="bar"))
+```
+
+
+## Figure 2 + 3
+
+```{r fig.height=8, fig.width=10, message=FALSE, warning=FALSE}
+figures2_3_curated <- function(metrics, name){
+  
+  # 1. Row: Simple Title Generation
+  plot_title <- function(title){ 
+    return(ggplot() + ggtitle(title) + theme_void() + 
+           theme(plot.title = element_text(hjust = 0.5, face="bold", size = 14)))
+  }
+  
+  # Create a row of titles based on the number of metrics provided
+  # Using a dynamic approach to handle single or multiple metrics
+  title_list <- lapply(metrics, plot_title)
+  title_row <- do.call(plot_grid, c(title_list, ncol = length(metrics)))
+  
+  # 2. Row: Curated Results Only
+  # The metric_row function already returns the assembled plot for the specified network
+  row_curated <- metric_row(metrics, plot="bar", networks = "Curated", 
+                            type="mse", ylab="MSE", directed=FALSE)
+
+  # 3. Assembly
+  # We only need the Title, the Data (Row B), and the Legend
+  figure <- plot_grid(
+    title_row, 
+    row_curated, 
+    undir_algo_legend, 
+    ncol = 1, 
+    rel_heights = c(0.1, 0.8, 0.1) # Adjust these ratios to fit your page
+  )
+  
+  print(figure)
+  savepdf(figure, name, w=10, h=6)
+  return(figure)
+}
+
+for (metric in c("Global Efficiency", "Local Efficiency", "Avg Shortest Path Length")){
+  figure2 <- figures2_3_curated(metrics = c(metric), name = paste0("figure2_", metric))
+  ggsave(filename = paste0(out_dir, "figure2_", metric, ".png"), 
+         plot = figure2, width = 8, height = 5, dpi = 300)
+}
+
+for (metric in c("Assortativity", "Clustering Coefficient", "Centralization")){
+  figure3 <- figures2_3_curated(metrics=c(metric), name=paste("figure3_",metric, sep="_"))
+  ggsave(filename = paste0(out_dir, "figure3_", metric, ".png"),
+    plot = figure3 ,width = 8,height = 5,dpi = 300)
+  }
+```
+
+## Figure 4
+
+```{r fig.height=6, fig.width=10, message=FALSE, warning=FALSE}
+metrics = c("Betweenness", "Centrality", "Radiality", "PageRank")
+
+for (metric in metrics){
+  row1 <- metric_row(metric, plot="ji_ratio", networks = "Curated", type="jaccard_ratio", directed=FALSE)
+  figure4 <- plot_grid(row1, undir_algo_legend, rel_heights = c(3, .5), nrow=2, labels=c("A", ""))
+  savepdf(figure4, paste0("figure4_", metric), w=10, h=6)
+  ggsave(
+    filename = paste0(out_dir, "figure4_", metric, ".png"),
+    plot = figure4,width = 10,height = 6,dpi = 300)
+}
+
+```
+
+## Figure S2
+
+```{r fig.height=12, fig.width=10, message=FALSE, warning=FALSE}
+metrics = c("Global Efficiency", "Local Efficiency", "Avg Shortest Path Length", "Assortativity", "Clustering Coefficient", "Centralization") 
+
+row1_2 <- metric_row(metrics, plot="violin", networks="Curated", type="raw", directed=FALSE, ncol=3)
+#row3_4 <- metric_row(metrics, plot="sina", networks="experimental", type="raw", directed=FALSE, ncol=3)
+
+figureS2 <- plot_grid(syn_network_legend, row1_2, rel_heights = c(.5, 3), nrow=2, labels=c("A", ""))
+figureS2
+savepdf(figureS2, "figureS2", w=10, h=12)
+ggsave(figureS2, filename = paste0(out_dir, "figureS2.png"), width = 10, height = 12, dpi = 300)
+```
+
+## Figure S4
+
+```{r fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
+metrics = c("Assortativity", "Clustering Coefficient", "In Centralization")
+
+row1 <- metric_row(metrics, plot="violin", networks="Curated", type="raw", directed=TRUE, x="Network", algos="ground truth")
+#row2 <- metric_row(metrics, plot="sina", networks="experimental", type="raw", directed=TRUE, x="Network", algos="ground truth")
+row3 <- metric_row(metrics, plot="bar", networks="Curated", type="mse", directed=TRUE, ylab="MSE")
+#row4 <- metric_row(metrics, plot="bar", networks="experimental", type="mse", directed=TRUE, ylab="MSE")
+
+figureS4 <- plot_grid(row1, row3, dir_algo_legend, nrow=3, rel_heights = c(3, 3, .5), labels=c("A", "B", ""))
+
+savepdf(figureS4, "figureS4", w=10, h=10)
+
+ggsave(
+  filename = paste0(out_dir, "figureS4_subgroups.png"),
+  plot = figureS4,width = 10,height = 10,dpi = 300)
+```
+  
+## Figure S5
+
+```{r fig.height=10, fig.width=10, message=FALSE, warning=FALSE}
+metrics = c("Betweenness", "Out Centrality", "PageRank")
+
+row1 <- metric_row(metrics, plot="ji_ratio", networks="Curated", type="jaccard_ratio", directed=TRUE)
+#row2 <- metric_row(metrics, plot="ji_ratio", networks="experimental", type="jaccard_ratio", directed=TRUE)
+row3 <- metric_row(metrics, plot="ji", networks="Curated", type="jaccard", directed=TRUE, ylab="Jaccard coefficient")
+#row4 <- metric_row(metrics, plot="ji", networks="experimental", type="jaccard", directed=TRUE, ylab="Jaccard coefficient")
+
+figureS5 <- plot_grid(dir_algo_legend, row1, row3, nrow=3, rel_heights = c(.5, 3, 3,3,3,.5), labels=c("", "A","B"))
+figureS5
+savepdf(figureS5, "figureS5", w=10, h=10)
+ggsave(
+  filename = paste0(out_dir, "figureS5_subgroups.png"),
+  plot = figureS5,width = 10,height = 10,dpi = 300)
+```
+
+## Figure S6
+
+```{r fig.height=6, fig.width=11, message=FALSE, warning=FALSE}
+metrics = c("Betweenness", "Centrality", "Radiality", "PageRank")
+
+row1 <- metric_row(metrics, plot="ji", networks="Curated", type="jaccard", directed=FALSE, ylab="Jaccard coefficient")
+#row2 <- metric_row(metrics, plot="ji", networks="experimental", type="jaccard", directed=FALSE, ylab="Jaccard coefficient")
+
+figureS6 <- plot_grid(NULL, row1, undir_algo_legend, rel_heights = c(.5, 3, .5), nrow=3, labels=c("A", "", ""))
+figureS6
+savepdf(figureS6, "figureS6", w=11, h=6)
+ggsave(
+  filename = paste0(out_dir, "figureS6_subgroups.png"),
+  plot = figureS6,width = 11,height = 6,dpi = 300)
+```
+
+## Additional Figure for correlation on node-level of graph-level properties
+
+```{r fig.height=6, fig.width=10, message=FALSE, warning=FALSE}
+metrics = c("Local Efficiency", "Clustering Coefficient", "Node Degrees")
+
+for (metric in metrics){
+  row1 <- metric_row(metrics, plot="bar", networks="Curated", type="correlation", directed=FALSE)
+  #row2 <- metric_row(metrics, plot="bar", networks="experimental", type="correlation", directed=FALSE)
+
+  figure <- plot_grid(undir_algo_legend, row1, nrow=2, rel_heights = c(.5, 3), labels=c("", "A"))
+  figure
+  savepdf(figure, paste0("figureCorr_", metric), w=10, h=6)
+  ggsave(
+    filename = paste0(out_dir, "figureCorr_", metric, ".png"),
+    plot = figure,width = 10,height = 6,dpi = 300)
+}
+```
+
