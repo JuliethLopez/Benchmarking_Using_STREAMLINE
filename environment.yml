@@ -1,5 +1,7 @@
-name: streamline
+name: BEELINE
 # Conda environment for the STREAMLINE GRN-inference benchmarking pipeline.
+# Named "BEELINE" because STREAMLINE is an evaluation extension of BEELINE and
+# is run from the same conda environment as the BEELINE prerequisite.
 # Covers the full BLEval / BLEvaluator_adapted.py stack:
 #   - graph-tool: global/local topological metrics (computeSTREAMLINE.py)
 #   - rpy2 + r-base + r-prroc: AUPRC/AUROC via the R PRROC package (computeDGAUC.py)
