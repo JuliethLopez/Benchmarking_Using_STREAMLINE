@@ -1,0 +1,145 @@
+# Input Settings: initialize base input folder names,
+# dataset collections, and algorithms to run over
+input_settings:
+
+    # Base input directory
+    input_dir: "inputs"
+
+    # Subdirectory of inputs that datasets are placed in
+    dataset_dir: "experimental/ESC"
+
+    # Denotes a list of datasets, each with the following parameters:
+    #   name: Name of the dataset. May be used in logging or other
+    #       messages written during execution
+    #
+    #   exprData: scRNA-Seq expression data file. Cells are along the
+    #            columns and genes are along the rows.
+    #   cellData: a file containing pseudotime ordering, or any other 
+    #             information about cells.
+    #   trueEdges: Name of the refrence network file in the
+    #              edge list format. Needed for evaluation.
+    #
+    # If this parameter is absent (or commented out), run BEELINE on every sub-directory of dataset_dir. 
+    # BEELINE will assume that these files are present under the default names 
+    # "han_GSE107552.csv", "PseudoTime.csv" and "refNetwork.csv", respectively.
+    datasets:
+          
+        - name: "ESC_Chip_seq"
+          exprData: "han_GSE107552.csv"
+          cellData: "PseudoTime.csv"
+          trueEdges: "hESC-ChIP-seq-network.csv"
+
+        - name: "ESC_ns_Chip_seq"
+          exprData: "han_GSE107552.csv"
+          cellData: "PseudoTime.csv"
+          trueEdges: "Non-specific-ChIP-seq-network.csv"
+
+        - name: "ESC_STRING_2026"
+          exprData: "han_GSE107552.csv"
+          cellData: "PseudoTime.csv"
+          trueEdges: "STRING_reference_2026.csv"
+
+        - name: "ESC_RegNetwork"
+          exprData: "han_GSE107552.csv"
+          cellData: "PseudoTime.csv"
+          trueEdges: "RegNetwork_human_TF_Target.csv"
+
+        - name: "ESC_hTFtargets"
+          exprData: "han_GSE107552.csv"
+          cellData: "PseudoTime.csv"
+          trueEdges: "hTFtargets_TF-Target-embryo.csv"
+
+
+    # Denotes a list of algorithms to run. Each has the following parameters:
+    #   name: Name of the algorithm. Must be recognized by the pipeline, see
+    #       code for acceptable values
+    #
+    #   should_run: whether or not to run the algorithm
+    #
+    #   params: any additional, algorithm-specific parameters
+    #       should be specified in the params map for a given algorithm
+    #
+    algorithms:
+
+              
+        - name: "PIDC"
+          params: 
+              should_run: [True]
+
+              
+        - name: "GRNBOOST2"
+          params: 
+              should_run: [True]
+
+        - name: "GENIE3"
+          params: 
+              should_run: [True]
+              
+        - name: "PPCOR"
+          params: 
+              should_run: [True]
+              # p-value cutoff
+              # Used in parsing output
+              pVal: [0.01]
+              
+               
+        - name: "INFERELATOR"
+          params:
+              should_run: [True]
+              use_priors: [False] # whether or not to use prior information, if False, then not calculate transcription factor activity
+              ref_net_tf_list: ["list_TF.csv"] # list of TFs in the reference network
+              num_bootstraps: [100] #The number of bootstraps to run
+              count_minimum: [0.05] #The mean expression value which is required to retain a gene for modeling
+              cross_val: [False] #To do or not crossvalidation
+              random_seed_min: [40] #The minimum random number seed to use
+              random_seed_max: [45] #The maximum random number seed to use
+              random_seed_selection: [0] #The random number seed to use for selection
+        
+              
+        - name: "hdWGCNA" # if number of cells is higher than 20.000, metacells are computed 
+          params:
+              should_run: [True]
+              run_tf: [False]
+              nThreads: [4] # number of threads to use
+              nVariableFeatures: [2000]
+              clustering_resolution: [0.5]
+              metacells_k: [25] # nearest-neighbors parameter in MetacellsByGroups fuction. 25 by default in the fuction
+              min_cells_per_metacell: [20] # minimum number of cells per metacell in MetacellsByGroups function. 100 by default in the function
+              max_shared_cells: [10] # maximum number of shared cells between two metacells in MetacellsByGroups function. 15 by default in the function
+              networkType: ["signed"] # WGCNA network type in TestSoftPowers function
+              soft_power: [0] # WGCNA soft-thresholding power in ConstructNetwork function
+              delete_grey_module: [True]
+
+        # - name: "TF_hdWGCNA"
+        #   params:
+        #       should_run: [False]
+        #       run_tf: [True]
+        #       nThreads: [8] # number of threads to use
+        #       nVariableFeatures: [2000]
+        #       clustering_resolution: [0.5]
+        #       metacells_k: [25] # nearest-neighbors parameter in MetacellsByGroups fuction. 25 by default in the fuction
+        #       min_cells_per_metacell: [20] # minimum number of cells per metacell in MetacellsByGroups function. 100 by default in the function
+        #       max_shared_cells: [10] # maximum number of shared cells between two metacells in MetacellsByGroups function. 15 by default in the function
+        #       networkType: ["signed"] # WGCNA network type in TestSoftPowers function
+        #       soft_power: [10] # WGCNA soft-thresholding power in ConstructNetwork function
+        #       delete_grey_module: [True]
+
+        - name: "BORDA"
+          params:
+             should_run: [True]
+        - name: "mBORDA"
+          params:
+             should_run: [True]
+        - name: "sBORDA"
+          params:
+             should_run: [True]
+        - name: "smBORDA"
+          params:
+             should_run: [True]
+
+# Output Settings: initialize base output folder names
+output_settings:
+
+    # Base output directory
+    output_dir: "outputs"
+    output_prefix: "ESC"

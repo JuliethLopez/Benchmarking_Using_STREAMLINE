@@ -1,0 +1,156 @@
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+Process ForkPoolWorker-2:
+Traceback (most recent call last):
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/process.py", line 297, in _bootstrap
+    self.run()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/process.py", line 99, in run
+    self._target(*self._args, **self._kwargs)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 110, in worker
+    task = get()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/queues.py", line 351, in get
+    with self._rlock:
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/rpy2/rinterface.py", line 87, in _sigint_handler
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+Process ForkPoolWorker-1:
+Traceback (most recent call last):
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/process.py", line 297, in _bootstrap
+    self.run()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/process.py", line 99, in run
+    self._target(*self._args, **self._kwargs)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 110, in worker
+    task = get()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/queues.py", line 351, in get
+    with self._rlock:
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/synchronize.py", line 95, in __enter__
+    return self._semlock.__enter__()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/rpy2/rinterface.py", line 87, in _sigint_handler
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+Process ForkPoolWorker-4:
+Traceback (most recent call last):
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/process.py", line 297, in _bootstrap
+    self.run()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/process.py", line 99, in run
+    self._target(*self._args, **self._kwargs)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 110, in worker
+    task = get()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/queues.py", line 352, in get
+    res = self._reader.recv_bytes()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/connection.py", line 407, in _recv_bytes
+    buf = self._recv(4)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/connection.py", line 379, in _recv
+    chunk = read(handle, remaining)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/rpy2/rinterface.py", line 87, in _sigint_handler
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+Process ForkPoolWorker-3:
+Traceback (most recent call last):
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/process.py", line 297, in _bootstrap
+    self.run()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/process.py", line 99, in run
+    self._target(*self._args, **self._kwargs)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 44, in mapstar
+    return list(map(*args))
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 111, in computeMetrics
+    metricDict[metric] = get_global_metric(metric, predGraph)
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 180, in get_global_metric
+    score = assortativity(Graph)
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 263, in assortativity
+    score = nx.degree_assortativity_coefficient(G)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/networkx/algorithms/assortativity/correlation.py", line 77, in degree_assortativity_coefficient
+    M = degree_mixing_matrix(G, x=x, y=y, nodes=nodes, weight=weight)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/networkx/algorithms/assortativity/mixing.py", line 155, in degree_mixing_matrix
+    d = degree_mixing_dict(G, x=x, y=y, nodes=nodes, weight=weight)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/networkx/algorithms/assortativity/mixing.py", line 120, in degree_mixing_dict
+    return mixing_dict(xy_iter, normalized=normalized)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/networkx/algorithms/assortativity/mixing.py", line 224, in mixing_dict
+    for x, y in xy:
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/networkx/algorithms/assortativity/pairs.py", line 120, in node_degree_xy
+    for v, degv in ydeg(neighbors, weight=weight):
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/networkx/classes/reportviews.py", line 447, in __iter__
+    yield (n, len(nbrs) + (n in nbrs))
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/networkx/classes/coreviews.py", line 267, in __len__
+    return sum(1 for n in self)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/networkx/classes/coreviews.py", line 267, in <genexpr>
+    return sum(1 for n in self)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/networkx/classes/coreviews.py", line 276, in <genexpr>
+    return (n for n in self._atlas if self.NODE_OK(n))
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/networkx/classes/coreviews.py", line 323, in new_node_ok
+    return self.NODE_OK(nbr) and self.EDGE_OK(node, nbr)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/rpy2/rinterface.py", line 87, in _sigint_handler
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+Process ForkPoolWorker-5:
+Traceback (most recent call last):
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/process.py", line 297, in _bootstrap
+    self.run()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/process.py", line 99, in run
+    self._target(*self._args, **self._kwargs)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 121, in worker
+    result = (True, func(*args, **kwds))
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 44, in mapstar
+    return list(map(*args))
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 111, in computeMetrics
+    metricDict[metric] = get_global_metric(metric, predGraph)
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 176, in get_global_metric
+    score = local_efficiency(Graph)
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 282, in local_efficiency
+    return sum(efficiency_list) / len(G)
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 281, in <genexpr>
+    efficiency_list = (global_efficiency(G.subgraph(G[v])) for v in G)
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 273, in global_efficiency
+    G_gt = nx_to_gt(G)
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 315, in nx_to_gt
+    G_gt.add_edge(vertices[src], vertices[dst])
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/__init__.py", line 2399, in add_edge
+    self.vertex(int(source), add_missing=add_missing),
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/__init__.py", line 1867, in vertex
+    v = libcore.get_vertex(self.__graph, int(i), use_index)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/rpy2/rinterface.py", line 87, in _sigint_handler
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "BLEvaluator_adapted.py", line 185, in <module>
+    main()
+  File "BLEvaluator_adapted.py", line 175, in main
+    evalSummarizer.computeSTREAMLINE_global(directed = opts.directed, verbose=opts.verbose)
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/__init__.py", line 235, in computeSTREAMLINE_global
+    STREAMLINE_multicore(self.input_settings, mode="global", directed = directed, saveraw=True, verbose=verbose)
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 49, in STREAMLINE_multicore
+    results = pool.map(func=computeMetrics, iterable=runners, chunksize=1)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 268, in map
+    return self._map_async(func, iterable, mapstar, chunksize).get()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 651, in get
+    self.wait(timeout)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 648, in wait
+    self._event.wait(timeout)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/threading.py", line 552, in wait
+    signaled = self._cond.wait(timeout)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/threading.py", line 296, in wait
+    waiter.acquire()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/rpy2/rinterface.py", line 87, in _sigint_handler
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+Terminated

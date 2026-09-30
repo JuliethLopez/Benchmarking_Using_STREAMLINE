@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "BLEvaluator_adapted.py", line 21, in <module>
+    import BLEval as ev
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/__init__.py", line 32, in <module>
+    from BLEval.computeDGAUC import PRROC
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeDGAUC.py", line 11, in <module>
+    from rpy2.robjects.packages import importr
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/rpy2/robjects/__init__.py", line 16, in <module>
+    import rpy2.rinterface as rinterface
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/rpy2/rinterface.py", line 12, in <module>
+    from rpy2.rinterface_lib import openrlib
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/rpy2/rinterface_lib/openrlib.py", line 14, in <module>
+    import _rinterface_cffi_api as _rinterface_cffi
+  File "<frozen importlib._bootstrap>", line 978, in _find_and_load
+KeyboardInterrupt
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Terminated

@@ -1,0 +1,53 @@
+Running STREAMLINE...
+Evaluating experimental networks (global)
+cannot find system Renviron
+cannot find system Renviron
+Evaluating experimental networks (local)
+cannot find system Renviron
+cannot find system Renviron
+Evaluating experimental networks (EPr)
+cannot find system Renviron
+cannot find system Renviron
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@node-13-20>
+Subject: Job 563037: <bash STREAMLINE_juli_experimental.sh -edslg> in cluster <farm22> Exited
+
+Job <bash STREAMLINE_juli_experimental.sh -edslg> was submitted from host <node-13-28> by user <jl38> in cluster <farm22> at Mon Sep 21 23:53:30 2026
+Job was executed on host(s) <4*node-13-20>, in queue <normal>, as user <jl38> in cluster <farm22> at Mon Sep 21 23:53:31 2026
+</nfs/users/nfs_j/jl38> was used as the home directory.
+</lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE> was used as the working directory.
+Started at Mon Sep 21 23:53:31 2026
+Terminated at Mon Sep 21 23:53:56 2026
+Results reported at Mon Sep 21 23:53:56 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+bash STREAMLINE_juli_experimental.sh -edslg
+------------------------------------------------------------
+
+Exited with exit code 2.
+
+Resource usage summary:
+
+    CPU time :                                   12.12 sec.
+    Max Memory :                                 115 MB
+    Average Memory :                             63.17 MB
+    Total Requested Memory :                     24000.00 MB
+    Delta Memory :                               23885.00 MB
+    Max Swap :                                   -
+    Max Processes :                              9
+    Max Threads :                                20
+    Run time :                                   26 sec.
+    Turnaround time :                            26 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <logs/log.563037.err> for stderr output of this job.
+

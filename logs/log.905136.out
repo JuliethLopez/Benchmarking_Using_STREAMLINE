@@ -1,0 +1,101 @@
+Running STREAMLINE...
+Evaluating experimental networks (global)
+
+Post-run evaluation started...
+
+
+Performing global STREAMLINE analysis
+
+
+Evaluation complete...
+
+
+Post-run evaluation started...
+
+
+Performing global STREAMLINE analysis
+Evaluating experimental networks (local)
+
+Post-run evaluation started...
+
+
+Performing local STREAMLINE analysis
+
+
+Evaluation complete...
+
+
+Post-run evaluation started...
+
+
+Performing local STREAMLINE analysis
+Evaluating experimental networks (EPr)
+
+Post-run evaluation started...
+
+
+Computing early precision values...
+
+
+Evaluation complete...
+
+
+Post-run evaluation started...
+
+
+Computing early precision values...
+
+Post-run evaluation started...
+
+
+Computing early precision values for activation and inhibitory edges...
+
+Post-run evaluation started...
+
+
+Computing early precision values for activation and inhibitory edges...
+Evaluating experimental networks (AUC)
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@node-14-23>
+Subject: Job 905136: <bash STREAMLINE_exp.sh -eslgp> in cluster <farm22> Exited
+
+Job <bash STREAMLINE_exp.sh -eslgp> was submitted from host <farm22-head2> by user <jl38> in cluster <farm22> at Fri Jun 19 09:44:55 2026
+Job was executed on host(s) <4*node-14-23>, in queue <long>, as user <jl38> in cluster <farm22> at Fri Jun 19 09:44:57 2026
+</nfs/users/nfs_j/jl38> was used as the home directory.
+</lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE> was used as the working directory.
+Started at Fri Jun 19 09:44:57 2026
+Terminated at Sun Jun 21 09:45:01 2026
+Results reported at Sun Jun 21 09:45:01 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+bash STREAMLINE_exp.sh -eslgp
+------------------------------------------------------------
+
+TERM_RUNLIMIT: job killed after reaching LSF run time limit.
+Exited with exit code 140.
+
+Resource usage summary:
+
+    CPU time :                                   176879.00 sec.
+    Max Memory :                                 4308 MB
+    Average Memory :                             1700.30 MB
+    Total Requested Memory :                     30000.00 MB
+    Delta Memory :                               25692.00 MB
+    Max Swap :                                   -
+    Max Processes :                              16
+    Max Threads :                                56
+    Run time :                                   172802 sec.
+    Turnaround time :                            172806 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <logs/log.905136.err> for stderr output of this job.
+

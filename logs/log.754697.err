@@ -1,0 +1,193 @@
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+  0%|          | 0/6 [00:00<?, ? Algorithms/s]
+  0%|          | 0/8 [00:00<?, ?it/s][A
+ 12%|█▎        | 1/8 [00:04<00:33,  4.76s/it][A
+ 25%|██▌       | 2/8 [00:09<00:27,  4.62s/it][A
+ 38%|███▊      | 3/8 [00:13<00:22,  4.48s/it][A
+ 50%|█████     | 4/8 [00:17<00:18,  4.54s/it][A
+ 62%|██████▎   | 5/8 [00:22<00:13,  4.53s/it][A
+ 75%|███████▌  | 6/8 [00:26<00:08,  4.45s/it][A
+ 88%|████████▊ | 7/8 [00:31<00:04,  4.45s/it][A
+100%|██████████| 8/8 [00:35<00:00,  4.44s/it][A
+[A 17%|█▋        | 1/6 [00:35<02:57, 35.55s/ Algorithms]
+  0%|          | 0/8 [00:00<?, ?it/s][A
+ 12%|█▎        | 1/8 [00:01<00:10,  1.50s/it][A
+ 25%|██▌       | 2/8 [00:02<00:08,  1.44s/it][A
+ 38%|███▊      | 3/8 [00:04<00:06,  1.39s/it][A
+ 50%|█████     | 4/8 [00:05<00:05,  1.40s/it][A
+ 62%|██████▎   | 5/8 [00:06<00:04,  1.36s/it][A
+ 75%|███████▌  | 6/8 [00:07<00:02,  1.31s/it][A
+ 88%|████████▊ | 7/8 [00:09<00:01,  1.30s/it][A
+100%|██████████| 8/8 [00:10<00:00,  1.32s/it][A
+[A 33%|███▎      | 2/6 [00:46<01:52, 28.07s/ Algorithms]
+  0%|          | 0/8 [00:00<?, ?it/s][A
+ 12%|█▎        | 1/8 [00:04<00:30,  4.36s/it][A
+ 25%|██▌       | 2/8 [00:08<00:25,  4.19s/it][A
+ 38%|███▊      | 3/8 [00:11<00:20,  4.02s/it][A
+ 50%|█████     | 4/8 [00:15<00:15,  3.95s/it][A
+ 62%|██████▎   | 5/8 [00:19<00:11,  3.94s/it][A
+ 75%|███████▌  | 6/8 [00:23<00:07,  3.83s/it][A
+ 88%|████████▊ | 7/8 [00:26<00:03,  3.85s/it][A
+100%|██████████| 8/8 [00:30<00:00,  3.87s/it][A
+[A 50%|█████     | 3/6 [01:17<01:26, 28.91s/ Algorithms]
+  0%|          | 0/8 [00:00<?, ?it/s][A
+ 12%|█▎        | 1/8 [00:00<00:02,  3.30it/s][A
+ 25%|██▌       | 2/8 [00:00<00:01,  3.43it/s][A
+ 38%|███▊      | 3/8 [00:00<00:01,  3.57it/s][A
+ 50%|█████     | 4/8 [00:01<00:01,  3.59it/s][A
+ 62%|██████▎   | 5/8 [00:01<00:00,  3.60it/s][A
+ 75%|███████▌  | 6/8 [00:01<00:00,  3.65it/s][A
+ 88%|████████▊ | 7/8 [00:01<00:00,  3.65it/s][A
+100%|██████████| 8/8 [00:02<00:00,  3.67it/s][A
+[A 67%|██████▋   | 4/6 [01:19<00:41, 20.90s/ Algorithms]
+  0%|          | 0/8 [00:00<?, ?it/s][A
+ 12%|█▎        | 1/8 [00:01<00:07,  1.03s/it][A
+ 25%|██▌       | 2/8 [00:01<00:05,  1.03it/s][A
+ 38%|███▊      | 3/8 [00:02<00:04,  1.05it/s][A
+ 50%|█████     | 4/8 [00:03<00:03,  1.03it/s][A
+ 62%|██████▎   | 5/8 [00:04<00:03,  1.01s/it][A
+ 75%|███████▌  | 6/8 [00:05<00:02,  1.03s/it][A
+ 88%|████████▊ | 7/8 [00:07<00:01,  1.07s/it][A
+100%|██████████| 8/8 [00:08<00:00,  1.11s/it][A
+[A 83%|████████▎ | 5/6 [01:27<00:17, 17.18s/ Algorithms]100%|██████████| 6/6 [01:27<00:00, 14.63s/ Algorithms]
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+  0%|          | 0/6 [00:00<?, ? Algorithms/s]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:04<00:00,  4.53s/it][A
+[A 17%|█▋        | 1/6 [00:04<00:22,  4.54s/ Algorithms]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:01<00:00,  1.33s/it][A
+[A 33%|███▎      | 2/6 [00:05<00:14,  3.58s/ Algorithms]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:00<00:00,  3.98it/s][A
+[A 50%|█████     | 3/6 [00:06<00:07,  2.58s/ Algorithms]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:00<00:00,  3.32it/s][A
+[A 67%|██████▋   | 4/6 [00:06<00:03,  1.90s/ Algorithms]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:00<00:00,  1.49it/s][A
+[A 83%|████████▎ | 5/6 [00:07<00:01,  1.53s/ Algorithms]100%|██████████| 6/6 [00:07<00:00,  1.18s/ Algorithms]
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+  0%|          | 0/6 [00:00<?, ? Algorithms/s]
+Traceback (most recent call last):
+  File "BLEvaluator_adapted.py", line 185, in <module>
+    main()
+  File "BLEvaluator_adapted.py", line 148, in main
+    actDF, inhDF = evalSummarizer.computeSignedEPrec()
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/__init__.py", line 305, in computeSignedEPrec
+    sEPrecDF = signedEPrec(self, algo[0])
+NameError: name 'signedEPrec' is not defined
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+  0%|          | 0/6 [00:00<?, ? Algorithms/s]
+Traceback (most recent call last):
+  File "BLEvaluator_adapted.py", line 185, in <module>
+    main()
+  File "BLEvaluator_adapted.py", line 148, in main
+    actDF, inhDF = evalSummarizer.computeSignedEPrec()
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/__init__.py", line 305, in computeSignedEPrec
+    sEPrecDF = signedEPrec(self, algo[0])
+NameError: name 'signedEPrec' is not defined
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+  0%|          | 0/8 [00:00<?, ? Datasets/s]
+  0%|          | 0/6 [00:00<?, ? Algorithms/s][ATraceback (most recent call last):
+  File "BLEvaluator_adapted.py", line 185, in <module>
+    main()
+  File "BLEvaluator_adapted.py", line 113, in main
+    AUPRC, AUROC = evalSummarizer.computeAUC(directed = opts.directed)
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/__init__.py", line 126, in computeAUC
+    directed = directed, selfEdges = False, plotFlag = False)
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeDGAUC.py", line 61, in PRROC
+    precisionDict[algo[0]], recallDict[algo[0]], FPRDict[algo[0]], TPRDict[algo[0]], AUPRC[algo[0]], AUROC[algo[0]] = computeScores(trueEdgesDF, predDF, directed = True, selfEdges = selfEdges)
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeDGAUC.py", line 165, in computeScores
+    if len(trueEdgesDF.loc[(trueEdgesDF['Gene1'] == key.split('|')[0]) &
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/core/ops.py", line 1283, in wrapper
+    res = na_op(values, other)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/core/ops.py", line 1143, in na_op
+    result = _comp_method_OBJECT_ARRAY(op, x, y)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/core/ops.py", line 1122, in _comp_method_OBJECT_ARRAY
+    result = libops.scalar_compare(x, y, op)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/rpy2/rinterface.py", line 87, in _sigint_handler
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+Exception ignored in: <function tqdm.__del__ at 0x145af0ab14d0>
+Traceback (most recent call last):
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/tqdm/_tqdm.py", line 931, in __del__
+    self.close()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/tqdm/_tqdm.py", line 1133, in close
+    self._decr_instances(self)
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/tqdm/_tqdm.py", line 496, in _decr_instances
+    cls.monitor.exit()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/tqdm/_monitor.py", line 52, in exit
+    self.join()
+  File "/software/conda/users/jl38/BEELINE/lib/python3.7/threading.py", line 1041, in join
+    raise RuntimeError("cannot join current thread")
+RuntimeError: cannot join current thread
+Terminated

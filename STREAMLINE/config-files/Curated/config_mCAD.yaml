@@ -1255,7 +1255,10 @@ input_settings:
           params: 
               should_run: [True]
               
-              
+        - name: "GENIE3"
+          params: 
+              should_run: [True]
+
         - name: "PPCOR"
           params: 
               should_run: [True]

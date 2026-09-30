@@ -1,0 +1,46 @@
+Running STREAMLINE...
+Evaluating Curated networks (global)
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@node-13-19>
+Subject: Job 291302: <bash STREAMLINE.sh -edslg> in cluster <farm22> Exited
+
+Job <bash STREAMLINE.sh -edslg> was submitted from host <node-13-21> by user <jl38> in cluster <farm22> at Mon Sep 14 19:29:00 2026
+Job was executed on host(s) <4*node-13-19>, in queue <normal>, as user <jl38> in cluster <farm22> at Mon Sep 14 19:29:01 2026
+</nfs/users/nfs_j/jl38> was used as the home directory.
+</lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE> was used as the working directory.
+Started at Mon Sep 14 19:29:01 2026
+Terminated at Mon Sep 14 19:29:18 2026
+Results reported at Mon Sep 14 19:29:18 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+bash STREAMLINE.sh -edslg
+------------------------------------------------------------
+
+TERM_OWNER: job killed by owner.
+Exited with exit code 130.
+
+Resource usage summary:
+
+    CPU time :                                   12.04 sec.
+    Max Memory :                                 92 MB
+    Average Memory :                             45.20 MB
+    Total Requested Memory :                     24000.00 MB
+    Delta Memory :                               23908.00 MB
+    Max Swap :                                   -
+    Max Processes :                              6
+    Max Threads :                                21
+    Run time :                                   17 sec.
+    Turnaround time :                            18 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <logs/log.291302.err> for stderr output of this job.
+

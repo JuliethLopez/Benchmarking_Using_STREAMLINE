@@ -32,14 +32,15 @@ library(ggpubr)
 ## Loading the data
 
 ```{r message=FALSE, warning=FALSE}
+setwd("/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/Figures")
 workingdir = "../STREAMLINE/outputs/" #the "output" folder of BEELINE/STREAMLINE
 
 postproc <- function(data, networks, directed, type){
-  algo_levels = c("GRNBOOST2", "INFERELATOR")
+  algo_levels = c("GRNBOOST2", "INFERELATOR", "GENIE3")
   if(!directed){algo_levels = c(algo_levels, "PIDC", "PPCOR", "hdWGCNA",  "BORDA", "mBORDA", "sBORDA", "smBORDA")}
   if(type=="raw"){algo_levels = c(algo_levels, "ground truth")}
   data$Algorithm <- factor(data$Algorithm, levels=algo_levels)
-  if(networks=="experimental"){data$Network <- factor(data$Network, levels=c("yeast", "hESC", "mDC", "mESC"))} 
+  if(networks=="experimental"){data$Network <- factor(data$Network, levels=c("ESC", "hHep"))} 
   else {data$Network <- factor(data$Network, levels=c("GSD", "HSC", "mCAD", "VSC"))}
   if(("Shortest Path Length") %in% colnames(data)){colnames(data)[colnames(data) == 'Shortest Path Length'] <- 'Avg Shortest Path Length'}
   return(data)
@@ -47,7 +48,7 @@ postproc <- function(data, networks, directed, type){
 
 STREAMLINE_results <- function(networks = c("Curated", "experimental"), type, directed, add_dataset=FALSE){
   read_file <- function(datadir, directed, type=c("mse", "mse_rel", "jaccard", "jaccard_ratio", "", "raw")) {
-    #print(datadir)
+    print(datadir)
     if (directed){ str_directed = "directed" } else {str_directed = "undirected"}
     if (type %in% c("raw", "mse", "mse_rel")) {str_mode = "global"} else {str_mode = "local"}
     data = read.csv(paste0(datadir, "/STREAMLINE_", str_mode, "_", str_directed, "_", type, ".csv"), check.names=FALSE)
@@ -62,7 +63,7 @@ STREAMLINE_results <- function(networks = c("Curated", "experimental"), type, di
     return(networks_df)
   }
   if(networks == "Curated"){datasets= c("GSD", "HSC", "mCAD", "VSC")}
-  else if(networks == "experimental"){datasets = c("yeast", "hESC", "mDC", "mESC")}
+  else if(networks == "experimental"){datasets = c("ESC", "hHep")}
   df_list = lapply(datasets, merge_datasets, networks=networks, directed=directed, type=type)
   data <- bind_rows(df_list)
   data <- postproc(data, networks, directed, type)
@@ -71,8 +72,7 @@ STREAMLINE_results <- function(networks = c("Curated", "experimental"), type, di
 load_performance_data <- function(metric, networks, directed){
   if (directed){ str_directed = "directed" } else {str_directed = "undirected"}
   if(networks == "Curated"){datasets= c("GSD", "HSC", "mCAD", "VSC")}
-  else if(networks == "experimental"){datasets = c("yeast", "hESC", "mDC", "mESC")}
-  
+  else if(networks == "experimental"){datasets = c("ESC", "hHep")}
   read_file <- function(dataset, networks, metric, directed) {
     path <- file.path(workingdir, networks, dataset, paste0(dataset, "-", metric, "-", directed, ".csv"))
     if(!file.exists(path)) {
@@ -102,7 +102,7 @@ load_performance_data <- function(metric, networks, directed){
 out_dir <- "./outputs_graphics/datasets/" #directory to save image outputs
 in_dir <- "../Figures/input/" #directory for required external images
 
-algo_palette = c("#37437C", "#9F5E45", "#407346", "#833B38", "#2ebebe", "#be2ebe", "#be842e", "#085e22", "grey")
+algo_palette = c("#37437C", "#F5E90F", "#9F5E45", "#407346", "#833B38", "#2ebebe", "#be2ebe", "#be842e", "#085e22", "grey")
 exp_network_palette = brewer.pal(n = 4, name = "Set1")
 syn_network_palette = brewer.pal(n = 4, name = "Set2")
 
@@ -201,29 +201,29 @@ dir_algo_legend <- get_legend(plot_metric("Assortativity", data=syn_data, plot="
 figures2_3_curated <- function(metrics, name){
   
   # 1. Row: Simple Title Generation
-  plot_title <- function(title){ 
-    return(ggplot() + ggtitle(title) + theme_void() + 
-           theme(plot.title = element_text(hjust = 0.5, face="bold", size = 14)))
-  }
+  # plot_title <- function(title){ 
+  #   return(ggplot() + ggtitle(title) + theme_void() + 
+  #          theme(plot.title = element_text(hjust = 0.5, face="bold", size = 14)))
+  # }
   
   # Create a row of titles based on the number of metrics provided
   # Using a dynamic approach to handle single or multiple metrics
-  title_list <- lapply(metrics, plot_title)
-  title_row <- do.call(plot_grid, c(title_list, ncol = length(metrics)))
+  #title_list <- lapply(metrics, plot_title)
+  #title_row <- do.call(plot_grid, c(title_list, ncol = length(metrics)))
   
-  # 2. Row: Curated Results Only
-  # The metric_row function already returns the assembled plot for the specified network
-  row_curated <- metric_row(metrics, plot="bar", networks = "Curated", 
-                            type="mse", ylab="MSE", directed=FALSE)
+  row2 <- metric_row(metrics, plot="bar", networks = "Curated", type="mse", ylab="MSE", directed=FALSE)
+  row3 <- metric_row(metrics, plot="bar", networks = "experimental", type="mse", ylab="MSE", directed=FALSE)
   
-  # 3. Assembly
-  # We only need the Title, the Data (Row B), and the Legend
   figure <- plot_grid(
-    title_row, 
-    row_curated, 
+    NULL,
+    row2,
+    NULL,
+    row3,
     undir_algo_legend, 
     ncol = 1, 
-    rel_heights = c(0.1, 0.8, 0.1) # Adjust these ratios to fit your page
+    rel_heights = c(.5, 3, .5, 3, 1), 
+    nrow=5,
+    labels=c("A", "", "B", "", "")
   )
   
   print(figure)
@@ -246,7 +246,9 @@ ggsave(filename = paste0(out_dir, "figure3.png"), plot = figure3,width = 10,heig
 metrics = c("Betweenness", "Centrality", "Radiality", "PageRank")
 
 row1 <- metric_row(metrics, plot="ji_ratio", networks = "Curated", type="jaccard_ratio", directed=FALSE)
-figure4 <- plot_grid(row1, undir_algo_legend, rel_heights = c(3, .5), nrow=2, labels=c("A", ""))
+row2 <- metric_row(metrics, plot="ji_ratio", networks = "experimental", type="jaccard_ratio", directed=FALSE)
+
+figure4 <- plot_grid(NULL, row1, NULL, row2, undir_algo_legend, rel_heights = c(.5, 3, .5, 3, 1), nrow=5, labels=c("A", "", "B", "", ""))
 savepdf(figure4, "figure4", w=10, h=6)
 ggsave(
   filename = paste0(out_dir, "figure4.png"),
@@ -531,8 +533,8 @@ summary_plot <- function(hub_metrics, ht_metrics, ie_metrics=NULL, directed, nam
   )
   
   print(figure)
-  savepdf(figure, name, w=15, h=10)
-  ggsave(figure, filename = paste0(out_dir, name, ".png"), width = 14, height = 9, dpi = 600)
+  savepdf(figure, name, w=17, h=15)
+  ggsave(figure, filename = paste0(out_dir, name, ".png"), width = 17, height = 15, dpi = 600)
 }
 
 ## Figure 5 (undirected)
@@ -671,11 +673,11 @@ ggsave(
 metrics = c("Assortativity", "Clustering Coefficient", "In Centralization")
 
 row1 <- metric_row(metrics, plot="violin", networks="Curated", type="raw", directed=TRUE, x="Network", algos="ground truth")
-#row2 <- metric_row(metrics, plot="sina", networks="experimental", type="raw", directed=TRUE, x="Network", algos="ground truth")
+row2 <- metric_row(metrics, plot="sina", networks="experimental", type="raw", directed=TRUE, x="Network", algos="ground truth")
 row3 <- metric_row(metrics, plot="bar", networks="Curated", type="mse", directed=TRUE, ylab="MSE")
-#row4 <- metric_row(metrics, plot="bar", networks="experimental", type="mse", directed=TRUE, ylab="MSE")
+row4 <- metric_row(metrics, plot="bar", networks="experimental", type="mse", directed=TRUE, ylab="MSE")
 
-figureS4 <- plot_grid(row1, row3, dir_algo_legend, nrow=3, rel_heights = c(3, 3, .5), labels=c("A", "B", ""))
+figureS4 <- plot_grid(row1, NULL, row3, NULL, row4, dir_algo_legend, rel_heights = c(3, .5, 3, .5, 3, .5), nrow=6, labels=c("A", "", "B", "", "C", ""))
 
 savepdf(figureS4, "figureS4", w=10, h=10)
 
@@ -690,11 +692,11 @@ ggsave(
 metrics = c("Betweenness", "Out Centrality", "PageRank")
 
 row1 <- metric_row(metrics, plot="ji_ratio", networks="Curated", type="jaccard_ratio", directed=TRUE)
-#row2 <- metric_row(metrics, plot="ji_ratio", networks="experimental", type="jaccard_ratio", directed=TRUE)
+row2 <- metric_row(metrics, plot="ji_ratio", networks="experimental", type="jaccard_ratio", directed=TRUE)
 row3 <- metric_row(metrics, plot="ji", networks="Curated", type="jaccard", directed=TRUE, ylab="Jaccard coefficient")
-#row4 <- metric_row(metrics, plot="ji", networks="experimental", type="jaccard", directed=TRUE, ylab="Jaccard coefficient")
+row4 <- metric_row(metrics, plot="ji", networks="experimental", type="jaccard", directed=TRUE, ylab="Jaccard coefficient")
 
-figureS5 <- plot_grid(dir_algo_legend, row1, row3, nrow=3, rel_heights = c(.5, 3, 3,3,3,.5), labels=c("", "A","B"))
+figureS5 <- plot_grid(dir_algo_legend, row1, NULL, row3, NULL, row4, rel_heights = c(.5, 3, .5, 3, .5, 3, .5), nrow=7, labels=c("", "A", "", "B", "", "C", ""))
 figureS5
 savepdf(figureS5, "figureS5", w=10, h=10)
 ggsave(
@@ -708,9 +710,9 @@ ggsave(
 metrics = c("Betweenness", "Centrality", "Radiality", "PageRank")
 
 row1 <- metric_row(metrics, plot="ji", networks="Curated", type="jaccard", directed=FALSE, ylab="Jaccard coefficient")
-#row2 <- metric_row(metrics, plot="ji", networks="experimental", type="jaccard", directed=FALSE, ylab="Jaccard coefficient")
+row2 <- metric_row(metrics, plot="ji", networks="experimental", type="jaccard", directed=FALSE, ylab="Jaccard coefficient")
 
-figureS6 <- plot_grid(NULL, row1, undir_algo_legend, rel_heights = c(.5, 3, .5), nrow=3, labels=c("A", "", ""))
+figureS6 <- plot_grid(NULL, row1, NULL, row2, undir_algo_legend, rel_heights = c(.5, 3, .5, 3, 1), nrow=5, labels=c("A", "", "B", "", ""))
 figureS6
 savepdf(figureS6, "figureS6", w=11, h=6)
 ggsave(
@@ -725,9 +727,9 @@ metrics = c("Local Efficiency", "Clustering Coefficient", "Node Degrees")
 
 for (metric in metrics){
   row1 <- metric_row(metrics, plot="bar", networks="Curated", type="correlation", directed=FALSE)
-  #row2 <- metric_row(metrics, plot="bar", networks="experimental", type="correlation", directed=FALSE)
+  row2 <- metric_row(metrics, plot="bar", networks="experimental", type="correlation", directed=FALSE)
 
-  figure <- plot_grid(undir_algo_legend, row1, nrow=2, rel_heights = c(.5, 3), labels=c("", "A"))
+  figure <- plot_grid(undir_algo_legend, row1, NULL, row2, rel_heights = c(1, 3, .5, 3, 1), nrow=5, labels=c("", "A", "", "B", ""))
   figure
   savepdf(figure, paste0("figureCorr_", metric), w=10, h=6)
   ggsave(

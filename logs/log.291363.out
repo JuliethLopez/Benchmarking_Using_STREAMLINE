@@ -1,0 +1,52 @@
+Running STREAMLINE...
+Evaluating Curated networks (global)
+Evaluating Curated networks (local)
+Evaluating Curated networks (EPr)
+Evaluating synthetic networks (AUC)
+Evaluating experimental networks (global)
+Evaluating experimental networks (local)
+Evaluating experimental networks (EPr)
+Evaluating experimental networks (AUC)
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@node-14-19>
+Subject: Job 291363: <bash STREAMLINE_juli.sh -edslg> in cluster <farm22> Exited
+
+Job <bash STREAMLINE_juli.sh -edslg> was submitted from host <node-13-21> by user <jl38> in cluster <farm22> at Mon Sep 14 19:29:35 2026
+Job was executed on host(s) <4*node-14-19>, in queue <normal>, as user <jl38> in cluster <farm22> at Mon Sep 14 19:29:36 2026
+</nfs/users/nfs_j/jl38> was used as the home directory.
+</lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE> was used as the working directory.
+Started at Mon Sep 14 19:29:36 2026
+Terminated at Mon Sep 14 19:35:19 2026
+Results reported at Mon Sep 14 19:35:19 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+bash STREAMLINE_juli.sh -edslg
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   299.07 sec.
+    Max Memory :                                 146 MB
+    Average Memory :                             82.64 MB
+    Total Requested Memory :                     24000.00 MB
+    Delta Memory :                               23854.00 MB
+    Max Swap :                                   -
+    Max Processes :                              8
+    Max Threads :                                21
+    Run time :                                   343 sec.
+    Turnaround time :                            344 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <logs/log.291363.err> for stderr output of this job.
+

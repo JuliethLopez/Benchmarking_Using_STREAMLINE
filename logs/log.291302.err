@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEvaluator_adapted.py", line 21, in <module>
+    import BLEval as ev
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/__init__.py", line 32, in <module>
+    from BLEval.computeDGAUC import PRROC
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeDGAUC.py", line 11, in <module>
+    from rpy2.robjects.packages import importr
+ModuleNotFoundError: No module named 'rpy2'
+Traceback (most recent call last):
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEvaluator_adapted.py", line 10, in <module>
+    import networkx as nx
+  File "/opt/view/lib/python3.10/site-packages/networkx/__init__.py", line 19, in <module>
+    from networkx import utils
+  File "/opt/view/lib/python3.10/site-packages/networkx/utils/__init__.py", line 4, in <module>
+    from networkx.utils.union_find import *
+KeyboardInterrupt

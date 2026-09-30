@@ -1,0 +1,53 @@
+Running STREAMLINE...
+Evaluating experimental networks (global)
+cannot find system Renviron
+cannot find system Renviron
+Evaluating experimental networks (local)
+cannot find system Renviron
+cannot find system Renviron
+Evaluating experimental networks (EPr)
+cannot find system Renviron
+cannot find system Renviron
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@node-13-13>
+Subject: Job 434131: <bash STREAMLINE_juli_experimental_nodirect.sh -eslg> in cluster <farm22> Exited
+
+Job <bash STREAMLINE_juli_experimental_nodirect.sh -eslg> was submitted from host <node-14-12> by user <jl38> in cluster <farm22> at Mon Sep 28 03:30:29 2026
+Job was executed on host(s) <4*node-13-13>, in queue <normal>, as user <jl38> in cluster <farm22> at Mon Sep 28 03:30:29 2026
+</nfs/users/nfs_j/jl38> was used as the home directory.
+</lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE> was used as the working directory.
+Started at Mon Sep 28 03:30:29 2026
+Terminated at Mon Sep 28 03:30:46 2026
+Results reported at Mon Sep 28 03:30:46 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+bash STREAMLINE_juli_experimental_nodirect.sh -eslg
+------------------------------------------------------------
+
+Exited with exit code 2.
+
+Resource usage summary:
+
+    CPU time :                                   9.54 sec.
+    Max Memory :                                 96 MB
+    Average Memory :                             73.75 MB
+    Total Requested Memory :                     24000.00 MB
+    Delta Memory :                               23904.00 MB
+    Max Swap :                                   -
+    Max Processes :                              5
+    Max Threads :                                8
+    Run time :                                   19 sec.
+    Turnaround time :                            17 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <logs/log.434131.err> for stderr output of this job.
+

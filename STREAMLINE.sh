@@ -37,19 +37,6 @@ if [ $local ==  "true" ]; then
     python  BLEvaluator_adapted.py --config config-files/Curated/config_GSD.yaml --STREAMLINE_local $directed
 fi
 
-if [ $epr ==  "true" ]; then
-    echo "Evaluating Curated networks (local)"
-    python  BLEvaluator_adapted.py --config config-files/Curated/config_mCAD.yaml --epr $directed
-    python  BLEvaluator_adapted.py --config config-files/Curated/config_VSC.yaml --epr $directed
-    python  BLEvaluator_adapted.py --config config-files/Curated/config_HSC.yaml --epr $directed
-    python  BLEvaluator_adapted.py --config config-files/Curated/config_GSD.yaml --epr $directed
-
-    python  BLEvaluator_adapted.py --config config-files/Curated/config_mCAD.yaml --sepr
-    python  BLEvaluator_adapted.py --config config-files/Curated/config_VSC.yaml --sepr
-    python  BLEvaluator_adapted.py --config config-files/Curated/config_HSC.yaml --sepr
-    python  BLEvaluator_adapted.py --config config-files/Curated/config_GSD.yaml --sepr
-fi
-
 if [ $statistical ==  "true" ]; then
     echo "Evaluating Curated networks (EPr)"
     python  BLEvaluator_adapted.py --config config-files/Curated/config_mCAD.yaml -e $directed
@@ -57,6 +44,11 @@ if [ $statistical ==  "true" ]; then
     python  BLEvaluator_adapted.py --config config-files/Curated/config_HSC.yaml -e $directed
     python  BLEvaluator_adapted.py --config config-files/Curated/config_GSD.yaml -e $directed
     
+    python  BLEvaluator_adapted.py --config config-files/Curated/config_mCAD.yaml --sepr
+    python  BLEvaluator_adapted.py --config config-files/Curated/config_VSC.yaml --sepr
+    python  BLEvaluator_adapted.py --config config-files/Curated/config_HSC.yaml --sepr
+    python  BLEvaluator_adapted.py --config config-files/Curated/config_GSD.yaml --sepr
+
     echo "Evaluating synthetic networks (AUC)"
     python  BLEvaluator_adapted.py --config config-files/Curated/config_mCAD.yaml -a $directed
     python  BLEvaluator_adapted.py --config config-files/Curated/config_VSC.yaml -a $directed
@@ -69,7 +61,6 @@ if [ $experimental ==  "true" ]; then
         echo "Evaluating experimental networks (global)"
         python  BLEvaluator_adapted.py --config config-files/experimental/config_yeast.yaml --STREAMLINE_global $directed
         python  BLEvaluator_adapted.py --config config-files/experimental/config_hESC.yaml --STREAMLINE_global $directed
-        python  BLEvaluator_adapted.py --config config-files/experimental/config_mDC.yaml --STREAMLINE_global $directed
         python  BLEvaluator_adapted.py --config config-files/experimental/config_mESC.yaml --STREAMLINE_global $directed
     fi
     

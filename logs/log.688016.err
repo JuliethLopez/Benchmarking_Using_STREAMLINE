@@ -1,0 +1,126 @@
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/networkx/algorithms/assortativity/correlation.py:288: RuntimeWarning: invalid value encountered in double_scalars
+  return (xy * (M - ab)).sum() / numpy.sqrt(vara * varb)
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+  0%|          | 0/6 [00:00<?, ? Algorithms/s]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:07<00:00,  7.12s/it][A
+[A 17%|█▋        | 1/6 [00:07<00:35,  7.14s/ Algorithms]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:02<00:00,  2.23s/it][A
+[A 33%|███▎      | 2/6 [00:09<00:22,  5.68s/ Algorithms]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:06<00:00,  6.92s/it][A
+[A 50%|█████     | 3/6 [00:16<00:18,  6.06s/ Algorithms]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:00<00:00,  2.89it/s][A
+[A 67%|██████▋   | 4/6 [00:16<00:08,  4.34s/ Algorithms]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:00<00:00,  1.08it/s][A
+[A 83%|████████▎ | 5/6 [00:17<00:03,  3.32s/ Algorithms]100%|██████████| 6/6 [00:17<00:00,  2.94s/ Algorithms]
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+  0%|          | 0/6 [00:00<?, ? Algorithms/s]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:07<00:00,  7.52s/it][A
+[A 17%|█▋        | 1/6 [00:07<00:37,  7.52s/ Algorithms]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:02<00:00,  2.32s/it][A
+[A 33%|███▎      | 2/6 [00:09<00:23,  5.96s/ Algorithms]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:00<00:00,  5.94it/s][A
+[A 50%|█████     | 3/6 [00:10<00:12,  4.22s/ Algorithms]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:00<00:00,  3.80it/s][A
+[A 67%|██████▋   | 4/6 [00:10<00:06,  3.04s/ Algorithms]
+  0%|          | 0/1 [00:00<?, ?it/s][A
+100%|██████████| 1/1 [00:00<00:00,  1.81it/s][A
+[A 83%|████████▎ | 5/6 [00:10<00:02,  2.29s/ Algorithms]100%|██████████| 6/6 [00:10<00:00,  1.81s/ Algorithms]
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+  0%|          | 0/6 [00:00<?, ? Algorithms/s]
+Traceback (most recent call last):
+  File "BLEvaluator_adapted.py", line 185, in <module>
+    main()
+  File "BLEvaluator_adapted.py", line 148, in main
+    actDF, inhDF = evalSummarizer.computeSignedEPrec()
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/__init__.py", line 305, in computeSignedEPrec
+    sEPrecDF = signedEPrec(self, algo[0])
+NameError: name 'signedEPrec' is not defined
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+  0%|          | 0/6 [00:00<?, ? Algorithms/s]
+Traceback (most recent call last):
+  File "BLEvaluator_adapted.py", line 185, in <module>
+    main()
+  File "BLEvaluator_adapted.py", line 148, in main
+    actDF, inhDF = evalSummarizer.computeSignedEPrec()
+  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/__init__.py", line 305, in computeSignedEPrec
+    sEPrecDF = signedEPrec(self, algo[0])
+NameError: name 'signedEPrec' is not defined
+Warning: namespace ‘magick’ is not available and has been replaced
+by .GlobalEnv when processing object ‘gsd_gt’
+Warning: namespace ‘cowplot’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+Warning: namespace ‘ggpubr’ is not available and has been replaced
+by .GlobalEnv when processing object ‘row1_2’
+/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
+  warnings.warn(msg, RuntimeWarning)
+  0%|          | 0/1 [00:00<?, ? Datasets/s]
+  0%|          | 0/6 [00:00<?, ? Algorithms/s][ATerminated

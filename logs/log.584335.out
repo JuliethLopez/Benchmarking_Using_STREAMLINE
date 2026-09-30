@@ -1,0 +1,43 @@
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@node-14-13>
+Subject: Job 584335: <bash STREAMLINE.sh -edslgp> in cluster <farm22> Exited
+
+Job <bash STREAMLINE.sh -edslgp> was submitted from host <farm22-head2> by user <jl38> in cluster <farm22> at Wed Jun 17 11:06:38 2026
+Job was executed on host(s) <2*node-14-13>, in queue <normal>, as user <jl38> in cluster <farm22> at Wed Jun 17 11:06:39 2026
+</nfs/users/nfs_j/jl38> was used as the home directory.
+</lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE> was used as the working directory.
+Started at Wed Jun 17 11:06:39 2026
+Terminated at Wed Jun 17 12:29:38 2026
+Results reported at Wed Jun 17 12:29:38 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+bash STREAMLINE.sh -edslgp
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   4633.00 sec.
+    Max Memory :                                 1573 MB
+    Average Memory :                             1230.62 MB
+    Total Requested Memory :                     24000.00 MB
+    Delta Memory :                               22427.00 MB
+    Max Swap :                                   -
+    Max Processes :                              16
+    Max Threads :                                32
+    Run time :                                   4979 sec.
+    Turnaround time :                            4980 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <logs/log.584335.err> for stderr output of this job.
+

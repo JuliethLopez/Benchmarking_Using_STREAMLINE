@@ -1244,7 +1244,10 @@ input_settings:
         - name: "GRNBOOST2"
           params: 
               should_run: [True]
-              
+        
+        - name: "GENIE3"
+          params: 
+              should_run: [True]
               
         - name: "PPCOR"
           params: 

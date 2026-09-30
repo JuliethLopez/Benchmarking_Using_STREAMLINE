@@ -1,0 +1,68 @@
+Running STREAMLINE...
+Evaluating Curated networks (global)
+cannot find system Renviron
+cannot find system Renviron
+cannot find system Renviron
+cannot find system Renviron
+Evaluating Curated networks (local)
+cannot find system Renviron
+cannot find system Renviron
+cannot find system Renviron
+cannot find system Renviron
+Evaluating Curated networks (EPr)
+cannot find system Renviron
+cannot find system Renviron
+cannot find system Renviron
+cannot find system Renviron
+cannot find system Renviron
+cannot find system Renviron
+cannot find system Renviron
+cannot find system Renviron
+Evaluating synthetic networks (AUC)
+cannot find system Renviron
+cannot find system Renviron
+cannot find system Renviron
+cannot find system Renviron
+
+------------------------------------------------------------
+Sender: LSF System <lsfadmin@node-13-26>
+Subject: Job 456884: <bash STREAMLINE.sh -dslgp> in cluster <farm22> Done
+
+Job <bash STREAMLINE.sh -dslgp> was submitted from host <node-14-15> by user <jl38> in cluster <farm22> at Thu Jul  2 23:44:27 2026
+Job was executed on host(s) <4*node-13-26>, in queue <normal>, as user <jl38> in cluster <farm22> at Thu Jul  2 23:44:39 2026
+</nfs/users/nfs_j/jl38> was used as the home directory.
+</lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE> was used as the working directory.
+Started at Thu Jul  2 23:44:39 2026
+Terminated at Thu Jul  2 23:45:53 2026
+Results reported at Thu Jul  2 23:45:53 2026
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+bash STREAMLINE.sh -dslgp
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   33.58 sec.
+    Max Memory :                                 102 MB
+    Average Memory :                             65.23 MB
+    Total Requested Memory :                     24000.00 MB
+    Delta Memory :                               23898.00 MB
+    Max Swap :                                   -
+    Max Processes :                              7
+    Max Threads :                                19
+    Run time :                                   74 sec.
+    Turnaround time :                            86 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file <logs/log.456884.err> for stderr output of this job.
+

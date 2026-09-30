@@ -231,7 +231,7 @@ class BLEval(object):
         :returns:ns
         '''
         if(directed):
-            self.input_settings.algorithms = [['GRNBOOST2', {'should_run': True}], ['INFERELATOR', {'should_run': True}]]
+            self.input_settings.algorithms = [['GRNBOOST2', {'should_run': True}], ['INFERELATOR', {'should_run': True}], ['GENIE3', {'should_run': True}]]
         STREAMLINE_multicore(self.input_settings, mode="global", directed = directed, saveraw=True, verbose=verbose)
 
         return
