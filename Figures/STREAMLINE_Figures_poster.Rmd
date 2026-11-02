@@ -365,7 +365,6 @@ row_groups <- tribble(
 
 preprocess_merged <- function(networks, hub_metrics, ht_metrics, ie_metrics=NULL, directed){
   max_scale <- function(scores){
-    scores[!is.finite(scores)] <- NA
     mx <- max(scores, na.rm = TRUE)
     if (!is.finite(mx) || mx == 0) return(rep(0, length(scores)))
     scores / mx
@@ -393,10 +392,10 @@ preprocess_merged <- function(networks, hub_metrics, ht_metrics, ie_metrics=NULL
   aggregated[[3]][hub_metrics] <- pmax(as.matrix(aggregated[[3]][hub_metrics]), 0)
   merged_dfs <- Reduce(function(...) merge(..., by="Algorithm", all=T), aggregated)
 
-  # Drop algorithms with missing hub/topology metrics (e.g. hdWGCNA all-NA).
-  # Otherwise NA contaminates max_scale via max() and can make every method look tied/best.
-  score_cols <- c(hub_metrics, topology_metrics)
-  merged_dfs <- merged_dfs[stats::complete.cases(merged_dfs[, score_cols, drop = FALSE]), , drop = FALSE]
+  # NA/missing = worst: topology is error (then 1-x), so fill with 1; hubs/EPr higher=better, fill with 0
+  for (col in topology_metrics) merged_dfs[[col]][is.na(merged_dfs[[col]])] <- 1
+  for (col in hub_metrics) merged_dfs[[col]][is.na(merged_dfs[[col]])] <- 0
+  if ("EPr" %in% names(merged_dfs)) merged_dfs$EPr[is.na(merged_dfs$EPr)] <- 0
 
   merged_dfs[,topology_metrics] <- apply(1 - merged_dfs[,topology_metrics], 2, max_scale) #scale 0-1 and make score the larger the better
   merged_dfs[,hub_metrics] <- apply(merged_dfs[,hub_metrics] , 2, max_scale)
