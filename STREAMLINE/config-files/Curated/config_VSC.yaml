@@ -1275,13 +1275,13 @@ input_settings:
           params:
               should_run: [True]
               run_tf: [False]
-              nThreads: [4] # number of threads to use
+              nThreads: [2] # number of threads to use
               nVariableFeatures: [2000]
               clustering_resolution: [0.5]
               metacells_k: [25] # nearest-neighbors parameter in MetacellsByGroups fuction. 25 by default in the fuction
               min_cells_per_metacell: [20] # minimum number of cells per metacell in MetacellsByGroups function. 100 by default in the function
               max_shared_cells: [10] # maximum number of shared cells between two metacells in MetacellsByGroups function. 15 by default in the function
-              networkType: ["signed"] # WGCNA network type in TestSoftPowers function
+              networkType: ["unsigned"] # WGCNA network type in TestSoftPowers function
               soft_power: [0] # WGCNA soft-thresholding power in ConstructNetwork function
               delete_grey_module: [True]
 

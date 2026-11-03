@@ -37,15 +37,15 @@ workingdir = "../STREAMLINE/outputs/" #the "output" folder of BEELINE/STREAMLINE
 postproc <- function(data, networks, directed, type){
   if(nrow(data) == 0) return(data)
   
-  algo_levels = c("GRNBOOST2", "INFERELATOR", "BORDA", "mBORDA", "sBORDA", "smBORDA")
-  if(!directed){algo_levels = c(algo_levels, "PIDC", "PPCOR", "hdWGCNA")}
+  algo_levels = c("GRNBOOST2", "INFERELATOR", "GENIE3")
+  if(!directed){algo_levels = c(algo_levels, "PIDC", "PPCOR", "hdWGCNA", "BORDA", "mBORDA", "sBORDA", "smBORDA")}
   if(type=="raw"){algo_levels = c(algo_levels, "ground truth")}
   
   data$Algorithm <- factor(data$Algorithm, levels=algo_levels)
   
   if(networks=="experimental"){
     # Experimental networks are flat and have specific names
-    data$Network <- factor(data$Network, levels=c("yeast", "hESC", "mDC", "mESC"))
+    data$Network <- factor(data$Network, levels=c("ESC", "hHep"))
   } else {
     # Curated networks have the 12 subgroups (Summarized across replicates)
     expected <- c("GSD-200", "GSD-1000", "GSD-2000",
@@ -106,7 +106,7 @@ STREAMLINE_results <- function(networks = "Curated", type, directed, add_dataset
 load_performance_data <- function(metric, networks, directed){
   if (directed){ str_directed = "directed" } else {str_directed = "undirected"}
   if(networks == "Curated"){datasets= c("GSD", "HSC", "mCAD", "VSC")}
-  else if(networks == "experimental"){datasets = c("yeast", "hESC", "mDC", "mESC")}
+  else if(networks == "experimental"){datasets = c("ESC", "hHep")}
   read_file <- function(dataset, networks, metric, directed) {
     data <- read.csv(paste0(workingdir, networks, "/", dataset, "/", dataset, "-", metric, "-", directed, ".csv"), row.names="X")
     raw_wide <- tibble::rownames_to_column(as.data.frame(t(data)), var = "Dataset")
@@ -129,7 +129,7 @@ out_dir <- "./outputs_graphics/groups/" #directory to save image outputs
 in_dir <- "../Figures/input/" #directory for required external images
 
 # Updated Palettes
-algo_palette = c("#37437C", "#9F5E45", "#407346", "#833B38", "#2ebebe", "#be2ebe", "#be842e", "#085e22", "grey")
+algo_palette = c("#37437C", "#F5E90F", "#9F5E45", "#407346", "#833B38", "#2ebebe", "#be2ebe", "#be842e", "#085e22", "grey")
 exp_network_palette = brewer.pal(n = 4, name = "Set1")
 syn_network_palette = colorRampPalette(brewer.pal(8, "Set2"))(12) # 12 colors for Curated
 
@@ -261,7 +261,7 @@ figures2_3_curated <- function(metrics, name){
     row_curated, 
     undir_algo_legend, 
     ncol = 1, 
-    rel_heights = c(0.1, 0.8, 0.1) # Adjust these ratios to fit your page
+    rel_heights = c(0.1, 0.8, 0.5) # Adjust these ratios to fit your page
   )
   
   print(figure)

@@ -5,6 +5,7 @@ STREAMLINE/inputs/
 STREAMLINE/outputs/Curated
 STREAMLINE/outputs/*
 STREAMLINE/outputs/*
+logs/*
 *PredictedNetworks.zip
 inputs.zip
 outputs.zip

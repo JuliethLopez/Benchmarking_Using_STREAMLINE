@@ -39,6 +39,11 @@ input_settings:
           cellData: "PseudoTime.csv"
           trueEdges: "STRING_reference_2026.csv"
 
+        - name: "ESC_STRING_reg_2026"
+          exprData: "han_GSE107552.csv"
+          cellData: "PseudoTime.csv"
+          trueEdges: "STRING_regulatory_reference_2026.csv"
+
         - name: "ESC_RegNetwork"
           exprData: "han_GSE107552.csv"
           cellData: "PseudoTime.csv"
@@ -106,7 +111,7 @@ input_settings:
               metacells_k: [25] # nearest-neighbors parameter in MetacellsByGroups fuction. 25 by default in the fuction
               min_cells_per_metacell: [20] # minimum number of cells per metacell in MetacellsByGroups function. 100 by default in the function
               max_shared_cells: [10] # maximum number of shared cells between two metacells in MetacellsByGroups function. 15 by default in the function
-              networkType: ["signed"] # WGCNA network type in TestSoftPowers function
+              networkType: ["unsigned"] # WGCNA network type in TestSoftPowers function
               soft_power: [0] # WGCNA soft-thresholding power in ConstructNetwork function
               delete_grey_module: [True]
 

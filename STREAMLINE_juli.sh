@@ -42,11 +42,6 @@ if [ $statistical ==  "true" ]; then
     python  BLEvaluator_adapted.py --config config-files/Curated/config_VSC.yaml -e $directed
     python  BLEvaluator_adapted.py --config config-files/Curated/config_HSC.yaml -e $directed
     python  BLEvaluator_adapted.py --config config-files/Curated/config_GSD.yaml -e $directed
-    
-    python  BLEvaluator_adapted.py --config config-files/Curated/config_mCAD.yaml --sepr
-    python  BLEvaluator_adapted.py --config config-files/Curated/config_VSC.yaml --sepr
-    python  BLEvaluator_adapted.py --config config-files/Curated/config_HSC.yaml --sepr
-    python  BLEvaluator_adapted.py --config config-files/Curated/config_GSD.yaml --sepr
 
     echo "Evaluating Curated networks (AUC)"
     python  BLEvaluator_adapted.py --config config-files/Curated/config_mCAD.yaml -a $directed
@@ -73,8 +68,9 @@ if [ $experimental ==  "true" ]; then
         python  BLEvaluator_adapted.py --config config-files/experimental/config_ESC.yaml -e $directed
         python  BLEvaluator_adapted.py --config config-files/experimental/config_HEP.yaml -e $directed
 
-        echo "Evaluating experimental networks (AUC)"
-        python  BLEvaluator_adapted.py --config config-files/experimental/config_ESC.yaml -a $directed
-        python  BLEvaluator_adapted.py --config config-files/experimental/config_HEP.yaml -a $directed
+        #echo "Evaluating experimental networks (AUC)"
+        #python  BLEvaluator_adapted.py --config config-files/experimental/config_ESC.yaml -a $directed
+        #python  BLEvaluator_adapted.py --config config-files/experimental/config_HEP.yaml -a $directed
+        
     fi
 fi

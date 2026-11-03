@@ -363,134 +363,229 @@ row_groups <- tribble(
   "experimental",      "Experimental networks",
 )
 
+# preprocess_merged <- function(networks, hub_metrics, ht_metrics, ie_metrics=NULL, directed){
+
+#   # ── Safe scaling preserving ranking structure ───────────────────────────────
+#   max_scale <- function(scores) {
+#     scores[!is.finite(scores)] <- NA
+#     mx <- max(scores, na.rm = TRUE)
+#     if(is.na(mx) || mx == 0) return(rep(0, length(scores)))
+#     scores / mx
+#   }
+
+#   topology_metrics <- c(ht_metrics, ie_metrics)
+#   performance_data <- load_performance_data(
+#     "EPr",
+#     networks = networks,
+#     directed = directed
+#   )
+
+#   topology_data <- STREAMLINE_results(
+#     networks,
+#     type = "mse",
+#     directed = directed,
+#     add_dataset = TRUE
+#   )[, c("Algorithm","Network", topology_metrics)]
+
+#   hub_data <- STREAMLINE_results(
+#     networks,
+#     type = "jaccard_ratio",
+#     directed = directed,
+#     add_dataset = TRUE
+#   )[, c("Algorithm","Network", hub_metrics)]
+
+#   agg_fun <- function(x) {
+#     x[!is.finite(x)] <- NA
+#     if(all(is.na(x))) return(0)
+#     mean(x, na.rm = TRUE)
+#   }
+  
+#   aggregated_means <- lapply(list(performance_data, topology_data, hub_data), function(x) {
+#     aggregate(. ~ Network + Algorithm, data=x[,!(colnames(x) %in% c("Dataset"))], FUN=agg_fun)
+#   })
+  
+#   aggregated_means[[2]][topology_metrics] <- abs(aggregated_means[[2]][topology_metrics])
+#   aggregated_means[[3]][hub_metrics] <- aggregated_means[[3]][hub_metrics] - 1
+  
+#   scale_max_per_network <- function(data){
+#     metric_cols <- colnames(data)[!(colnames(data) %in% c("Dataset", "Algorithm", "Network"))]
+#     for (col in metric_cols){
+#       for (network in unique(data$Network)){
+#         idx <- data$Network == network
+#         data[idx, col] = max_scale(data[idx, col])
+#       }}
+#     return(data)
+#   }
+#   max_scaled_networks <- lapply(aggregated_means, scale_max_per_network)
+  
+#   aggregated <- lapply(max_scaled_networks, function(x) {
+#     aggregate(. ~ Algorithm, data=x[,!(colnames(x) %in% c("Network", "Dataset"))], FUN=agg_fun)
+#   })
+#   aggregated[[3]][hub_metrics] <- pmax(as.matrix(aggregated[[3]][hub_metrics]), 0)
+#   merged_dfs <- Reduce(function(...) merge(..., by="Algorithm", all=T), aggregated)
+
+#   merged_dfs[,topology_metrics] <- apply(1 - merged_dfs[,topology_metrics], 2, max_scale)
+#   merged_dfs[,hub_metrics] <- apply(merged_dfs[,hub_metrics] , 2, max_scale)
+  
+#   if(!directed){
+#     merged_dfs$information_exchange <- max_scale(rowSums(merged_dfs[,ie_metrics], na.rm=TRUE))
+#   }
+#   merged_dfs$hub_topology <- max_scale(rowSums(merged_dfs[,ht_metrics], na.rm=TRUE))
+#   merged_dfs$hub_identification <- max_scale(rowSums(merged_dfs[,hub_metrics], na.rm=TRUE))
+#   merged_dfs[,"EPr"] <- max_scale(merged_dfs[,"EPr"])
+  
+#   tie_max_scale <- function(ranks){
+#     if(length(unique(ranks)) != 1) { max_scale(ranks) } 
+#     else { rep(1, length(ranks)) }
+#   }
+    
+#   merged_dfs$overall <- tie_max_scale(rowSums(merged_dfs[,c(hub_metrics, topology_metrics)], na.rm=TRUE))
+#   merged_dfs <- merged_dfs[order(-merged_dfs$overall),]
+  
+#   label_cols = c(hub_metrics, topology_metrics, "hub_identification", "hub_topology")
+#   if(!directed){label_cols <- c(label_cols, "information_exchange")}else{label_cols <- c(label_cols, "overall", "EPr")}
+#   rank_cols = c(label_cols, "EPr", "overall")
+
+#   # --- SIMPLIFIED PIPELINE FOR LABELS AND RANKING ---
+#   plot_df <- merged_dfs |>
+#     mutate(rank = as.character(seq_len(n()))) |>
+#     # Assign labels cleanly based on raw values before tie-breakers alter them
+#     mutate(across(all_of(label_cols), function(x) {
+#       # Add subtle unique tie-breaker using overall score sequence to resolve true data ties
+#       v <- ifelse(is.finite(x), x, 0)
+#       v_tied <- v + (overall * 1e-8)
+#       ranks <- rank(-v_tied, ties.method="min")
+#       ifelse(ranks <= 1 & v > 0, "1", "")
+#     }, .names = "label_{col}")) |>
+#     # Determine circle ranking properties safely
+#     mutate(across(all_of(rank_cols), function(x) {
+#       v <- ifelse(is.finite(x), x, 0)
+#       # Keep absolute 0 performance metrics forced at zero rank
+#       if (all(v == 0)) return(rep(0, length(v)))
+      
+#       v_tied <- v + (overall * 1e-8)
+#       calculated_ranks <- rank(v_tied, ties.method = "average")
+#       scaled_ranks <- tie_max_scale(calculated_ranks)
+      
+#       # Ensure positions with absolute zero scores carry zero radius
+#       scaled_ranks[v == 0] <- 0
+#       return(scaled_ranks)
+#     }, .names = "rank_{col}")) |>
+#     as.data.frame()  
+  
+#   plot_df$spacer <- ""
+#   return(plot_df)
+# }
+
 preprocess_merged <- function(networks, hub_metrics, ht_metrics, ie_metrics=NULL, directed){
-
-  # ── Safe scaling preserving ranking structure ───────────────────────────────
-  max_scale <- function(scores) {
-    scores[!is.finite(scores)] <- NA
-    mx <- max(scores, na.rm = TRUE)
-    if(is.na(mx) || mx == 0) return(rep(0, length(scores)))
-    scores / mx
+  # na_to_zero=FALSE keeps NA through per-network MSE scaling so that
+  # 1-x inversion cannot turn missing topology into a perfect score.
+  max_scale <- function(scores, na_to_zero = TRUE) {
+    finite <- is.finite(scores)
+    mx <- if (any(finite)) max(scores[finite]) else NA_real_
+    if (!is.finite(mx) || mx == 0) {
+      out <- ifelse(finite, 0, NA_real_)
+      if (na_to_zero) out[!finite] <- 0
+      return(out)
+    }
+    scaled <- scores / mx
+    scaled[!finite] <- if (na_to_zero) 0 else NA_real_
+    scaled
   }
-
-  topology_metrics <- c(ht_metrics, ie_metrics)
-  performance_data <- load_performance_data(
-    "EPr",
-    networks = networks,
-    directed = directed
-  )
-
-  topology_data <- STREAMLINE_results(
-    networks,
-    type = "mse",
-    directed = directed,
-    add_dataset = TRUE
-  )[, c("Algorithm","Network", topology_metrics)]
-
-  hub_data <- STREAMLINE_results(
-    networks,
-    type = "jaccard_ratio",
-    directed = directed,
-    add_dataset = TRUE
-  )[, c("Algorithm","Network", hub_metrics)]
-
   agg_fun <- function(x) {
-    x[!is.finite(x)] <- NA
-    if(all(is.na(x))) return(0)
-    mean(x, na.rm = TRUE)
+    x <- x[is.finite(x)]
+    if (length(x) == 0) return(NA_real_)
+    mean(x)
   }
-  
+
+  topology_metrics = c(ht_metrics, ie_metrics)
+  performance_data <- load_performance_data("EPr", networks=networks, directed=directed)
+  topology_data = STREAMLINE_results(networks, type="mse", directed=directed, add_dataset = TRUE)[,c("Algorithm", "Network", topology_metrics)]
+  hub_data = STREAMLINE_results(networks, type="jaccard_ratio", directed=directed, add_dataset = TRUE)[,c("Algorithm", "Network", hub_metrics)]
+
   aggregated_means <- lapply(list(performance_data, topology_data, hub_data), function(x) {
-    aggregate(. ~ Network + Algorithm, data=x[,!(colnames(x) %in% c("Dataset"))], FUN=agg_fun)
+    aggregate(. ~ Network + Algorithm, data=x[,!(colnames(x)%in% c("Dataset"))], FUN=agg_fun, na.action=na.pass)
   })
-  
   aggregated_means[[2]][topology_metrics] <- abs(aggregated_means[[2]][topology_metrics])
   aggregated_means[[3]][hub_metrics] <- aggregated_means[[3]][hub_metrics] - 1
-  
   scale_max_per_network <- function(data){
     metric_cols <- colnames(data)[!(colnames(data) %in% c("Dataset", "Algorithm", "Network"))]
     for (col in metric_cols){
       for (network in unique(data$Network)){
-        idx <- data$Network == network
-        data[idx, col] = max_scale(data[idx, col])
+        data[data$Network == network, col] = max_scale(data[data$Network == network, col], na_to_zero=FALSE)
       }}
     return(data)
   }
   max_scaled_networks <- lapply(aggregated_means, scale_max_per_network)
-  
+  # After per-network scaling, leftover NA must count as worst so it is
+  # not dropped when averaging across networks (0 MSE would look perfect).
+  fill_na_as_worst <- function(data, cols, worst) {
+    for (col in cols) {
+      data[[col]][!is.finite(data[[col]])] <- worst
+    }
+    data
+  }
+  epr_cols <- setdiff(colnames(max_scaled_networks[[1]]), c("Algorithm", "Network", "Dataset"))
+  max_scaled_networks[[1]] <- fill_na_as_worst(max_scaled_networks[[1]], epr_cols, 0)
+  max_scaled_networks[[2]] <- fill_na_as_worst(max_scaled_networks[[2]], topology_metrics, 1)
+  max_scaled_networks[[3]] <- fill_na_as_worst(max_scaled_networks[[3]], hub_metrics, 0)
+
   aggregated <- lapply(max_scaled_networks, function(x) {
-    aggregate(. ~ Algorithm, data=x[,!(colnames(x) %in% c("Network", "Dataset"))], FUN=agg_fun)
+    aggregate(. ~ Algorithm, data=x[,!(colnames(x)%in% c("Network", "Dataset"))], FUN=agg_fun, na.action=na.pass)
   })
   aggregated[[3]][hub_metrics] <- pmax(as.matrix(aggregated[[3]][hub_metrics]), 0)
   merged_dfs <- Reduce(function(...) merge(..., by="Algorithm", all=T), aggregated)
 
+  # Invert topology first (higher = better), then scale; NA/Inf become 0 (worst)
   merged_dfs[,topology_metrics] <- apply(1 - merged_dfs[,topology_metrics], 2, max_scale)
-  merged_dfs[,hub_metrics] <- apply(merged_dfs[,hub_metrics] , 2, max_scale)
-  
+  merged_dfs[,hub_metrics] <- apply(merged_dfs[,hub_metrics], 2, max_scale)
+
   if(!directed){
-    merged_dfs$information_exchange <- max_scale(rowSums(merged_dfs[,ie_metrics], na.rm=TRUE))
+    merged_dfs$information_exchange <- max_scale(rowSums(merged_dfs[,ie_metrics]))
   }
-  merged_dfs$hub_topology <- max_scale(rowSums(merged_dfs[,ht_metrics], na.rm=TRUE))
-  merged_dfs$hub_identification <- max_scale(rowSums(merged_dfs[,hub_metrics], na.rm=TRUE))
+  merged_dfs$hub_topology <- max_scale(rowSums(merged_dfs[,ht_metrics]))
+  merged_dfs$hub_identification <- max_scale(rowSums(merged_dfs[,hub_metrics]))
   merged_dfs[,"EPr"] <- max_scale(merged_dfs[,"EPr"])
-  
+
   tie_max_scale <- function(ranks){
-    if(length(unique(ranks)) != 1) { max_scale(ranks) } 
-    else { rep(1, length(ranks)) }
+    ranks[!is.finite(ranks)] <- 0
+    if (all(ranks == 0)) return(rep(0, length(ranks)))
+    if (length(unique(ranks)) != 1) max_scale(ranks) else rep(1, length(ranks))
   }
-    
-  merged_dfs$overall <- tie_max_scale(rowSums(merged_dfs[,c(hub_metrics, topology_metrics)], na.rm=TRUE))
+
+  merged_dfs$overall <- tie_max_scale(rowSums(merged_dfs[,c(hub_metrics, topology_metrics)]))
   merged_dfs <- merged_dfs[order(-merged_dfs$overall),]
-  
+
+  label_rank <- function(scores, ...) {
+    v <- ifelse(is.finite(scores), scores, 0)
+    ranks <- rank(-v, ties.method="min", ...)
+    ifelse(ranks <= 1 & v > 0, as.character(ranks), "")
+  }
+
   label_cols = c(hub_metrics, topology_metrics, "hub_identification", "hub_topology")
   if(!directed){label_cols <- c(label_cols, "information_exchange")}else{label_cols <- c(label_cols, "overall", "EPr")}
   rank_cols = c(label_cols, "EPr", "overall")
-
-  # --- SIMPLIFIED PIPELINE FOR LABELS AND RANKING ---
   plot_df <- merged_dfs |>
-    mutate(rank = as.character(seq_len(n()))) |>
-    # Assign labels cleanly based on raw values before tie-breakers alter them
-    mutate(across(all_of(label_cols), function(x) {
-      # Add subtle unique tie-breaker using overall score sequence to resolve true data ties
-      v <- ifelse(is.finite(x), x, 0)
-      v_tied <- v + (overall * 1e-8)
-      ranks <- rank(-v_tied, ties.method="min")
-      ifelse(ranks <= 1 & v > 0, "1", "")
-    }, .names = "label_{col}")) |>
-    # Determine circle ranking properties safely
+    mutate(rank = as.character(seq_len(nrow(merged_dfs)))) |>
+    mutate(across(all_of(label_cols), label_rank, .names = "label_{col}")) |>
     mutate(across(all_of(rank_cols), function(x) {
       v <- ifelse(is.finite(x), x, 0)
-      # Keep absolute 0 performance metrics forced at zero rank
       if (all(v == 0)) return(rep(0, length(v)))
-      
-      v_tied <- v + (overall * 1e-8)
-      calculated_ranks <- rank(v_tied, ties.method = "average")
-      scaled_ranks <- tie_max_scale(calculated_ranks)
-      
-      # Ensure positions with absolute zero scores carry zero radius
+      scaled_ranks <- tie_max_scale(rank(v, ties.method = "average"))
       scaled_ranks[v == 0] <- 0
-      return(scaled_ranks)
+      scaled_ranks
     }, .names = "rank_{col}")) |>
-    as.data.frame()  
-  
-  plot_df$spacer <- ""
+    as.data.frame()
+
   return(plot_df)
 }
 
 summary_plot <- function(hub_metrics, ht_metrics, ie_metrics=NULL, directed, name){
   synthetic_summary_plot <- preprocess_merged(networks="Curated", hub_metrics, ht_metrics, ie_metrics, directed)
   experimental_summary_plot <- preprocess_merged(networks="experimental", hub_metrics, ht_metrics, ie_metrics, directed)
-  
-  # --fix BUG--
-  all_metrics <- c(hub_metrics, ht_metrics, ie_metrics)
-  synthetic_keep <- rowSums(!is.na(synthetic_summary_plot[, all_metrics, drop = FALSE])) > 0
-  synthetic_summary_plot <- synthetic_summary_plot[synthetic_keep, ]
-  
-  experimental_keep <- rowSums(!is.na(experimental_summary_plot[, all_metrics, drop = FALSE])) > 0
-  experimental_summary_plot <- experimental_summary_plot[experimental_keep, ]
-  # -----------
-  
+
   summary_plot <- rbind(synthetic_summary_plot, experimental_summary_plot)
+  summary_plot$spacer <- ""
 
   summary_plot$id <- as.character(seq_len(nrow(summary_plot)))
   row_info <- data.frame(id = summary_plot$id, group = c(rep("Curated", nrow(synthetic_summary_plot)), rep("experimental", nrow(experimental_summary_plot))))
@@ -637,7 +732,7 @@ ggsave(
 metrics = c("Global Efficiency", "Local Efficiency", "Avg Shortest Path Length", "Assortativity", "Clustering Coefficient", "Centralization") 
 
 row1_2 <- metric_row(metrics, plot="violin", networks="Curated", type="raw", directed=FALSE, ncol=3)
-#row3_4 <- metric_row(metrics, plot="sina", networks="experimental", type="raw", directed=FALSE, ncol=3)
+row3_4 <- metric_row(metrics, plot="sina", networks="experimental", type="raw", directed=FALSE, ncol=3)
 
 figureS2 <- plot_grid(syn_network_legend, row1_2, rel_heights = c(.5, 3), nrow=2, labels=c("A", ""))
 figureS2
