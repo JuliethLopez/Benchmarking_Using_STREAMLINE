@@ -1,0 +1,27 @@
+name: BEELINE
+# Conda environment for the STREAMLINE GRN-inference benchmarking pipeline.
+# Named "BEELINE" because STREAMLINE is an evaluation extension of BEELINE and
+# is run from the same conda environment as the BEELINE prerequisite.
+# Covers the full BLEval / BLEvaluator_adapted.py stack:
+#   - graph-tool: global/local topological metrics (computeSTREAMLINE.py)
+#   - rpy2 + r-base + r-prroc: AUPRC/AUROC via the R PRROC package (computeDGAUC.py)
+#   - scikit-learn is pinned to 1.4.x because the pipeline calls
+#     precision_recall_curve(..., probas_pred=...), removed in scikit-learn >= 1.5.
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - graph-tool
+  - rpy2
+  - r-base
+  - r-prroc
+  - numpy
+  - pandas
+  - networkx
+  - tqdm
+  - pyyaml
+  - scipy
+  - seaborn
+  - matplotlib
+  - scikit-learn=1.4
+  - pip
