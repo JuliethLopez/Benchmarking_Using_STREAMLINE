@@ -1,186 +1,0 @@
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-  0%|          | 0/10 [00:00<?, ? Algorithms/s]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:05<00:23,  5.77s/it][A
- 40%|████      | 2/5 [00:11<00:17,  5.71s/it][A
- 60%|██████    | 3/5 [00:18<00:12,  6.00s/it][A
- 80%|████████  | 4/5 [00:23<00:05,  5.97s/it][A
-100%|██████████| 5/5 [00:29<00:00,  5.71s/it][A
-[A 10%|█         | 1/10 [00:29<04:21, 29.07s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:01<00:06,  1.54s/it][A
- 40%|████      | 2/5 [00:03<00:04,  1.55s/it][A
- 60%|██████    | 3/5 [00:05<00:03,  1.79s/it][A
- 80%|████████  | 4/5 [00:07<00:01,  1.74s/it][A
-100%|██████████| 5/5 [00:08<00:00,  1.71s/it][A
-[A 20%|██        | 2/10 [00:37<03:03, 22.98s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:05<00:22,  5.59s/it][A
- 40%|████      | 2/5 [00:10<00:15,  5.33s/it][A
- 60%|██████    | 3/5 [00:14<00:10,  5.06s/it][A
- 80%|████████  | 4/5 [00:18<00:04,  4.70s/it][A
-100%|██████████| 5/5 [00:23<00:00,  4.68s/it][A
-[A 30%|███       | 3/10 [01:01<02:41, 23.08s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:03<00:13,  3.49s/it][A
- 40%|████      | 2/5 [00:07<00:10,  3.51s/it][A
- 60%|██████    | 3/5 [00:12<00:08,  4.09s/it][A
- 80%|████████  | 4/5 [00:17<00:04,  4.25s/it][A
-100%|██████████| 5/5 [00:20<00:00,  3.94s/it][A
-[A 40%|████      | 4/10 [01:21<02:13, 22.26s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:00<00:00,  5.55it/s][A
- 40%|████      | 2/5 [00:00<00:00,  6.11it/s][A
- 60%|██████    | 3/5 [00:00<00:00,  3.95it/s][A
- 80%|████████  | 4/5 [00:00<00:00,  4.40it/s][A
-100%|██████████| 5/5 [00:01<00:00,  5.08it/s][A
-[A 50%|█████     | 5/10 [01:22<01:19, 15.90s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:00<00:03,  1.11it/s][A
- 40%|████      | 2/5 [00:01<00:02,  1.13it/s][A
- 60%|██████    | 3/5 [00:02<00:01,  1.03it/s][A
- 80%|████████  | 4/5 [00:03<00:00,  1.00it/s][A
-100%|██████████| 5/5 [00:04<00:00,  1.02it/s][A
-[A 60%|██████    | 6/10 [01:27<00:50, 12.65s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:04<00:16,  4.04s/it][A
- 40%|████      | 2/5 [00:07<00:11,  3.75s/it][A
- 60%|██████    | 3/5 [00:12<00:08,  4.15s/it][A
- 80%|████████  | 4/5 [00:16<00:04,  4.34s/it][A
-100%|██████████| 5/5 [00:22<00:00,  4.58s/it][A
-[A 70%|███████   | 7/10 [01:50<00:46, 15.65s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:04<00:17,  4.39s/it][A
- 40%|████      | 2/5 [00:08<00:13,  4.34s/it][A
- 60%|██████    | 3/5 [00:13<00:09,  4.51s/it][A
- 80%|████████  | 4/5 [00:17<00:04,  4.38s/it][A
-100%|██████████| 5/5 [00:20<00:00,  4.07s/it][A
-[A 80%|████████  | 8/10 [02:11<00:34, 17.24s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:03<00:14,  3.62s/it][A
- 40%|████      | 2/5 [00:06<00:10,  3.48s/it][A
- 60%|██████    | 3/5 [00:11<00:07,  3.85s/it][A
- 80%|████████  | 4/5 [00:15<00:03,  3.83s/it][A
-100%|██████████| 5/5 [00:19<00:00,  3.89s/it][A
-[A 90%|█████████ | 9/10 [02:31<00:18, 18.05s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:03<00:15,  3.79s/it][A
- 40%|████      | 2/5 [00:08<00:11,  3.98s/it][A
- 60%|██████    | 3/5 [00:11<00:07,  3.89s/it][A
- 80%|████████  | 4/5 [00:15<00:03,  3.71s/it][A
-100%|██████████| 5/5 [00:18<00:00,  3.56s/it][A
-[A100%|██████████| 10/10 [02:49<00:00, 18.15s/ Algorithms]
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-  0%|          | 0/10 [00:00<?, ? Algorithms/s]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:03<00:15,  3.95s/it][A
- 40%|████      | 2/5 [00:07<00:11,  3.89s/it][A
- 60%|██████    | 3/5 [00:11<00:07,  3.93s/it][A
- 80%|████████  | 4/5 [00:15<00:03,  3.84s/it][A
-100%|██████████| 5/5 [00:18<00:00,  3.76s/it][A
-[A 10%|█         | 1/10 [00:18<02:50, 18.97s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:00<00:03,  1.01it/s][A
- 40%|████      | 2/5 [00:01<00:02,  1.02it/s][A
- 60%|██████    | 3/5 [00:03<00:02,  1.09s/it][A
- 80%|████████  | 4/5 [00:04<00:01,  1.08s/it][A
-100%|██████████| 5/5 [00:05<00:00,  1.07s/it][A
-[A 20%|██        | 2/10 [00:24<01:59, 14.91s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:03<00:13,  3.44s/it][A
- 40%|████      | 2/5 [00:06<00:10,  3.43s/it][A
- 60%|██████    | 3/5 [00:10<00:07,  3.62s/it][A
- 80%|████████  | 4/5 [00:14<00:03,  3.59s/it][A
-100%|██████████| 5/5 [00:17<00:00,  3.57s/it][A
-[A 30%|███       | 3/10 [00:42<01:50, 15.83s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 40%|████      | 2/5 [00:00<00:00, 17.59it/s][A
- 60%|██████    | 3/5 [00:00<00:00,  7.76it/s][A
-100%|██████████| 5/5 [00:00<00:00,  9.08it/s][A
-[A 40%|████      | 4/10 [00:42<01:07, 11.25s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:00<00:00,  9.73it/s][A
- 60%|██████    | 3/5 [00:00<00:00,  7.32it/s][A
- 80%|████████  | 4/5 [00:00<00:00,  7.66it/s][A
-100%|██████████| 5/5 [00:00<00:00,  6.70it/s][A 50%|█████     | 5/10 [00:43<00:40,  8.10s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:00<00:01,  2.80it/s][A
- 40%|████      | 2/5 [00:00<00:01,  2.73it/s][A
- 60%|██████    | 3/5 [00:01<00:00,  2.45it/s][A
- 80%|████████  | 4/5 [00:01<00:00,  2.56it/s][A
-100%|██████████| 5/5 [00:01<00:00,  2.71it/s][A
-[A 60%|██████    | 6/10 [00:45<00:25,  6.25s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:02<00:09,  2.34s/it][A
- 40%|████      | 2/5 [00:04<00:07,  2.34s/it][A
- 60%|██████    | 3/5 [00:08<00:05,  2.65s/it][A
- 80%|████████  | 4/5 [00:11<00:02,  2.79s/it][A
-100%|██████████| 5/5 [00:13<00:00,  2.79s/it][A
-[A 70%|███████   | 7/10 [00:59<00:25,  8.65s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:02<00:08,  2.16s/it][A
- 40%|████      | 2/5 [00:04<00:06,  2.16s/it][A
- 60%|██████    | 3/5 [00:06<00:04,  2.29s/it][A
- 80%|████████  | 4/5 [00:09<00:02,  2.29s/it][A
-100%|██████████| 5/5 [00:11<00:00,  2.32s/it][A
-[A 80%|████████  | 8/10 [01:11<00:19,  9.53s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:02<00:08,  2.22s/it][A
- 40%|████      | 2/5 [00:04<00:06,  2.25s/it][A
- 60%|██████    | 3/5 [00:07<00:05,  2.60s/it][A
- 80%|████████  | 4/5 [00:11<00:02,  2.76s/it][A
-100%|██████████| 5/5 [00:13<00:00,  2.78s/it][A
-[A 90%|█████████ | 9/10 [01:25<00:10, 10.94s/ Algorithms]
-  0%|          | 0/5 [00:00<?, ?it/s][A
- 20%|██        | 1/5 [00:02<00:09,  2.33s/it][A
- 40%|████      | 2/5 [00:04<00:06,  2.31s/it][A
- 60%|██████    | 3/5 [00:07<00:04,  2.45s/it][A
- 80%|████████  | 4/5 [00:09<00:02,  2.46s/it][A
-100%|██████████| 5/5 [00:12<00:00,  2.45s/it][A
-[A100%|██████████| 10/10 [01:37<00:00, 11.34s/ Algorithms]

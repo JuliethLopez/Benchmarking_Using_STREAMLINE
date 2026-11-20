@@ -1,292 +1,0 @@
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-multiprocessing.pool.RemoteTraceback: 
-"""
-Traceback (most recent call last):
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 121, in worker
-    result = (True, func(*args, **kwds))
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 44, in mapstar
-    return list(map(*args))
-  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 73, in computeMetrics
-    trueEdgesDF = load_data(path=(opts.datadir +'/'+ dataset["name"] + '/' + dataset["trueEdges"]), sep=",", opts=opts)
-  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 127, in load_data
-    edgesDF = pd.read_csv(path, sep = sep, header = 0, index_col = None)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 678, in parser_f
-    return _read(filepath_or_buffer, kwds)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 440, in _read
-    parser = TextFileReader(filepath_or_buffer, **kwds)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 787, in __init__
-    self._make_engine(self.engine)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 1014, in _make_engine
-    self._engine = CParserWrapper(self.f, **self.options)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 1708, in __init__
-    self._reader = parsers.TextReader(src, **kwds)
-  File "pandas/_libs/parsers.pyx", line 384, in pandas._libs.parsers.TextReader.__cinit__
-  File "pandas/_libs/parsers.pyx", line 695, in pandas._libs.parsers.TextReader._setup_parser_source
-FileNotFoundError: File b'inputs/experimental/hHep/hHep_Chip_seq/HepG2-ChIP-seq-network.csv' does not exist
-"""
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "BLEvaluator_adapted.py", line 185, in <module>
-    main()
-  File "BLEvaluator_adapted.py", line 175, in main
-    evalSummarizer.computeSTREAMLINE_global(directed = opts.directed, verbose=opts.verbose)
-  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/__init__.py", line 235, in computeSTREAMLINE_global
-    STREAMLINE_multicore(self.input_settings, mode="global", directed = directed, saveraw=True, verbose=verbose)
-  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 49, in STREAMLINE_multicore
-    results = pool.map(func=computeMetrics, iterable=runners, chunksize=1)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 268, in map
-    return self._map_async(func, iterable, mapstar, chunksize).get()
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 657, in get
-    raise self._value
-FileNotFoundError: File b'inputs/experimental/hHep/hHep_Chip_seq/HepG2-ChIP-seq-network.csv' does not exist
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-multiprocessing.pool.RemoteTraceback: 
-"""
-Traceback (most recent call last):
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 121, in worker
-    result = (True, func(*args, **kwds))
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 44, in mapstar
-    return list(map(*args))
-  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 73, in computeMetrics
-    trueEdgesDF = load_data(path=(opts.datadir +'/'+ dataset["name"] + '/' + dataset["trueEdges"]), sep=",", opts=opts)
-  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 127, in load_data
-    edgesDF = pd.read_csv(path, sep = sep, header = 0, index_col = None)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 678, in parser_f
-    return _read(filepath_or_buffer, kwds)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 440, in _read
-    parser = TextFileReader(filepath_or_buffer, **kwds)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 787, in __init__
-    self._make_engine(self.engine)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 1014, in _make_engine
-    self._engine = CParserWrapper(self.f, **self.options)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 1708, in __init__
-    self._reader = parsers.TextReader(src, **kwds)
-  File "pandas/_libs/parsers.pyx", line 384, in pandas._libs.parsers.TextReader.__cinit__
-  File "pandas/_libs/parsers.pyx", line 695, in pandas._libs.parsers.TextReader._setup_parser_source
-FileNotFoundError: File b'inputs/experimental/hHep/hHep_Chip_seq/HepG2-ChIP-seq-network.csv' does not exist
-"""
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "BLEvaluator_adapted.py", line 185, in <module>
-    main()
-  File "BLEvaluator_adapted.py", line 179, in main
-    evalSummarizer.computeSTREAMLINE_local(directed = opts.directed, verbose=opts.verbose)
-  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/__init__.py", line 248, in computeSTREAMLINE_local
-    STREAMLINE_multicore(self.input_settings, mode="local", directed = directed, saveraw=True, verbose=verbose)
-  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeSTREAMLINE.py", line 49, in STREAMLINE_multicore
-    results = pool.map(func=computeMetrics, iterable=runners, chunksize=1)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 268, in map
-    return self._map_async(func, iterable, mapstar, chunksize).get()
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/multiprocessing/pool.py", line 657, in get
-    raise self._value
-FileNotFoundError: File b'inputs/experimental/hHep/hHep_Chip_seq/HepG2-ChIP-seq-network.csv' does not exist
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-  0%|          | 0/9 [00:00<?, ? Algorithms/s]
-  0%|          | 0/8 [00:00<?, ?it/s][A
- 12%|█▎        | 1/8 [00:08<00:56,  8.09s/it][A
- 25%|██▌       | 2/8 [00:15<00:47,  7.86s/it][A
- 38%|███▊      | 3/8 [00:22<00:38,  7.72s/it][A
- 50%|█████     | 4/8 [00:31<00:31,  7.88s/it][A
- 62%|██████▎   | 5/8 [00:37<00:22,  7.53s/it][A
- 75%|███████▌  | 6/8 [00:44<00:14,  7.34s/it][A
- 88%|████████▊ | 7/8 [00:52<00:07,  7.48s/it][A
-100%|██████████| 8/8 [00:59<00:00,  7.46s/it][A
-[A 11%|█         | 1/9 [00:59<07:59, 59.92s/ Algorithms]
-  0%|          | 0/8 [00:00<?, ?it/s][A
- 12%|█▎        | 1/8 [00:01<00:12,  1.84s/it][A
- 25%|██▌       | 2/8 [00:03<00:10,  1.81s/it][A
- 38%|███▊      | 3/8 [00:05<00:09,  1.80s/it][A
- 50%|█████     | 4/8 [00:07<00:07,  1.82s/it][A
- 62%|██████▎   | 5/8 [00:09<00:05,  1.86s/it][A
- 75%|███████▌  | 6/8 [00:11<00:04,  2.03s/it][A
- 88%|████████▊ | 7/8 [00:14<00:02,  2.19s/it][A
-100%|██████████| 8/8 [00:16<00:00,  2.20s/it][A
-[A 22%|██▏       | 2/9 [01:16<05:28, 46.86s/ Algorithms]
-  0%|          | 0/8 [00:00<?, ?it/s][A
- 12%|█▎        | 1/8 [00:07<00:54,  7.73s/it][A
- 25%|██▌       | 2/8 [00:14<00:45,  7.53s/it][A
- 38%|███▊      | 3/8 [00:20<00:34,  6.89s/it][A
- 50%|█████     | 4/8 [00:25<00:25,  6.44s/it][A
- 62%|██████▎   | 5/8 [00:32<00:19,  6.56s/it][A
- 75%|███████▌  | 6/8 [00:37<00:11,  5.99s/it][A
- 88%|████████▊ | 7/8 [00:42<00:05,  5.95s/it][A
-100%|██████████| 8/8 [00:49<00:00,  6.15s/it][A
-[A 33%|███▎      | 3/9 [02:05<04:46, 47.67s/ Algorithms]
-  0%|          | 0/8 [00:00<?, ?it/s][A
- 12%|█▎        | 1/8 [00:00<00:01,  3.79it/s][A
- 25%|██▌       | 2/8 [00:00<00:01,  3.82it/s][A
- 38%|███▊      | 3/8 [00:00<00:01,  3.94it/s][A
- 50%|█████     | 4/8 [00:01<00:01,  3.78it/s][A
- 62%|██████▎   | 5/8 [00:01<00:00,  3.62it/s][A
- 75%|███████▌  | 6/8 [00:01<00:00,  3.59it/s][A
- 88%|████████▊ | 7/8 [00:01<00:00,  3.52it/s][A
-100%|██████████| 8/8 [00:02<00:00,  3.48it/s][A
-[A 44%|████▍     | 4/9 [02:08<02:50, 34.04s/ Algorithms]
-  0%|          | 0/8 [00:00<?, ?it/s][A
- 12%|█▎        | 1/8 [00:01<00:07,  1.12s/it][A
- 25%|██▌       | 2/8 [00:02<00:06,  1.11s/it][A
- 38%|███▊      | 3/8 [00:03<00:05,  1.10s/it][A
- 50%|█████     | 4/8 [00:04<00:04,  1.06s/it][A
- 62%|██████▎   | 5/8 [00:05<00:03,  1.04s/it][A
- 75%|███████▌  | 6/8 [00:06<00:02,  1.08s/it][A
- 88%|████████▊ | 7/8 [00:07<00:01,  1.07s/it][A
-100%|██████████| 8/8 [00:08<00:00,  1.12s/it][A
-[A 56%|█████▌    | 5/9 [02:16<01:45, 26.46s/ Algorithms]
-  0%|          | 0/8 [00:00<?, ?it/s][A
- 12%|█▎        | 1/8 [00:06<00:48,  6.98s/it][A
- 25%|██▌       | 2/8 [00:11<00:38,  6.35s/it][A
- 38%|███▊      | 3/8 [00:17<00:30,  6.04s/it][A
- 50%|█████     | 4/8 [00:24<00:25,  6.45s/it][A
- 62%|██████▎   | 5/8 [00:32<00:20,  6.95s/it][A
- 75%|███████▌  | 6/8 [00:38<00:13,  6.57s/it][A
- 88%|████████▊ | 7/8 [00:45<00:06,  6.66s/it][A
-100%|██████████| 8/8 [00:51<00:00,  6.46s/it][A
-[A 67%|██████▋   | 6/9 [03:08<01:42, 34.01s/ Algorithms]
-  0%|          | 0/8 [00:00<?, ?it/s][A
- 12%|█▎        | 1/8 [00:06<00:45,  6.55s/it][A
- 25%|██▌       | 2/8 [00:13<00:40,  6.80s/it][A
- 38%|███▊      | 3/8 [00:20<00:33,  6.79s/it][A
- 50%|█████     | 4/8 [00:27<00:27,  6.81s/it][A
- 62%|██████▎   | 5/8 [00:32<00:19,  6.34s/it][A
- 75%|███████▌  | 6/8 [00:39<00:12,  6.31s/it][A
- 88%|████████▊ | 7/8 [00:45<00:06,  6.23s/it][A
-100%|██████████| 8/8 [00:52<00:00,  6.59s/it][A
-[A 78%|███████▊  | 7/9 [04:01<01:19, 39.56s/ Algorithms]
-  0%|          | 0/8 [00:00<?, ?it/s][A
- 12%|█▎        | 1/8 [00:07<00:49,  7.12s/it][A
- 25%|██▌       | 2/8 [00:13<00:41,  6.92s/it][A
- 38%|███▊      | 3/8 [00:19<00:32,  6.55s/it][A
- 50%|█████     | 4/8 [00:26<00:27,  6.85s/it][A
- 62%|██████▎   | 5/8 [00:34<00:20,  6.97s/it][A
- 75%|███████▌  | 6/8 [00:40<00:13,  6.76s/it][A
- 88%|████████▊ | 7/8 [00:46<00:06,  6.59s/it][A
-100%|██████████| 8/8 [00:53<00:00,  6.81s/it][A
-[A 89%|████████▉ | 8/9 [04:55<00:43, 43.96s/ Algorithms]
-  0%|          | 0/8 [00:00<?, ?it/s][A
- 12%|█▎        | 1/8 [00:06<00:47,  6.74s/it][A
- 25%|██▌       | 2/8 [00:14<00:42,  7.00s/it][A
- 38%|███▊      | 3/8 [00:21<00:35,  7.14s/it][A
- 50%|█████     | 4/8 [00:29<00:28,  7.24s/it][A
- 62%|██████▎   | 5/8 [00:36<00:21,  7.33s/it][A
- 75%|███████▌  | 6/8 [00:44<00:14,  7.38s/it][A
- 88%|████████▊ | 7/8 [00:52<00:07,  7.50s/it][A
-100%|██████████| 8/8 [00:59<00:00,  7.50s/it][A
-[A100%|██████████| 9/9 [05:54<00:00, 48.65s/ Algorithms]
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-  0%|          | 0/9 [00:00<?, ? Algorithms/s]
-  0%|          | 0/3 [00:00<?, ?it/s][A
-[A
-Traceback (most recent call last):
-  File "BLEvaluator_adapted.py", line 185, in <module>
-    main()
-  File "BLEvaluator_adapted.py", line 141, in main
-    ePRDF = evalSummarizer.computeEarlyPrec(directed = opts.directed)
-  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/__init__.py", line 282, in computeEarlyPrec
-    Eprec[algo[0]] = EarlyPrec(self, algo[0], directed=directed)
-  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/computeEarlyPrec.py", line 42, in EarlyPrec
-    header = 0, index_col = None)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 678, in parser_f
-    return _read(filepath_or_buffer, kwds)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 440, in _read
-    parser = TextFileReader(filepath_or_buffer, **kwds)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 787, in __init__
-    self._make_engine(self.engine)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 1014, in _make_engine
-    self._engine = CParserWrapper(self.f, **self.options)
-  File "/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/pandas/io/parsers.py", line 1708, in __init__
-    self._reader = parsers.TextReader(src, **kwds)
-  File "pandas/_libs/parsers.pyx", line 384, in pandas._libs.parsers.TextReader.__cinit__
-  File "pandas/_libs/parsers.pyx", line 695, in pandas._libs.parsers.TextReader._setup_parser_source
-FileNotFoundError: File b'inputs/experimental/hHep/hHep_Chip_seq/HepG2-ChIP-seq-network.csv' does not exist
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-  0%|          | 0/9 [00:00<?, ? Algorithms/s]
-Traceback (most recent call last):
-  File "BLEvaluator_adapted.py", line 185, in <module>
-    main()
-  File "BLEvaluator_adapted.py", line 148, in main
-    actDF, inhDF = evalSummarizer.computeSignedEPrec()
-  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/__init__.py", line 305, in computeSignedEPrec
-    sEPrecDF = signedEPrec(self, algo[0])
-NameError: name 'signedEPrec' is not defined
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-  0%|          | 0/9 [00:00<?, ? Algorithms/s]
-Traceback (most recent call last):
-  File "BLEvaluator_adapted.py", line 185, in <module>
-    main()
-  File "BLEvaluator_adapted.py", line 148, in main
-    actDF, inhDF = evalSummarizer.computeSignedEPrec()
-  File "/lustre/scratch127/humgen/projects_v2/jaguar_analysis/analysis/jl38/STREAMLINE/STREAMLINE/BLEval/__init__.py", line 305, in computeSignedEPrec
-    sEPrecDF = signedEPrec(self, algo[0])
-NameError: name 'signedEPrec' is not defined
-Warning: namespace ‘magick’ is not available and has been replaced
-by .GlobalEnv when processing object ‘gsd_gt’
-Warning: namespace ‘cowplot’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-Warning: namespace ‘ggpubr’ is not available and has been replaced
-by .GlobalEnv when processing object ‘row1_2’
-/software/conda/users/jl38/BEELINE/lib/python3.7/site-packages/graph_tool/draw/cairo_draw.py:1494: RuntimeWarning: Error importing Gtk module: No module named 'gi'; GTK+ drawing will not work.
-  warnings.warn(msg, RuntimeWarning)
-  0%|          | 0/8 [00:00<?, ? Datasets/s]
-  0%|          | 0/9 [00:00<?, ? Algorithms/s][AUser defined signal 2
